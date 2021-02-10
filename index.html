@@ -4,15 +4,17 @@
     <head>
         <meta charset="utf-8">
         <title>ReoXplore</title>
+        <link rel="stylesheet" href="style.css"> 
     </head>
     
     <body>
     
-        <p>Choose channel<p>
+        <h3>Channels<h3>
         <button onclick="chooseChannel('sync');">sync</button>
         <button onclick="chooseChannel('lossy_sync');">lossy sync</button>
         <button onclick="chooseChannel('fifo');">fifo</button>
         <button onclick="chooseChannel('transform');">transform</button>
+        <button onclick="chooseChannel('sync_drain');">sync drain</button>
 
         <script src="p5.min.js"></script>
         <script src="node.js"></script>
