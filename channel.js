@@ -41,6 +41,14 @@ class Channel {
                 pop()
                 break
 
+            case 'async_drain':
+                push()
+                translate(mediumX, mediumY)
+                rotate(angle)
+                line(-4, arrowSize, -4, -arrowSize)
+                line(4, arrowSize, 4, -arrowSize)
+                pop()
+                //dont use break here because asnyc_drain also has sync_drain's arrows
             case 'sync_drain':
                 push()
                 translate(this.startNode.x, this.startNode.y) //translates to the initial vertex
@@ -57,7 +65,7 @@ class Channel {
         line(this.startNode.x, this.startNode.y, this.endNode.x, this.endNode.y)
         drawingContext.setLineDash([]) //reset to solid line
 
-        if (this.channelMode != 'sync_drain') {
+        if (!['sync_drain', 'async_drain'].includes(this.channelMode)) {
             // this code is to make the arrow point:
             push()
             translate(this.endNode.x, this.endNode.y) //translates to the destination vertex
