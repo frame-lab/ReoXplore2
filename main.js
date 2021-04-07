@@ -49,8 +49,10 @@ function main() {
         if (!previous_node) { //if didnt click on a previous node, get the last one
             previous_node = nodes[count-2]
         }
-        let channel = new Channel(previous_node, node, channelMode)
-        channels.push(channel)
+        if (previous_node != node) {
+            let channel = new Channel(previous_node, node, channelMode)
+            channels.push(channel)
+        }
         previous_node = null
     }
 
