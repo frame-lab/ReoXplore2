@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import P5Wrapper from "react-p5-wrapper";
+import "./style.css";
 import Node from "./components/Node";
 import Channel from "./components/Channel";
 import { ChannelButtons } from "./components/ChannelButtons";
