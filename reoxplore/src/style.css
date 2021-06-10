@@ -19,7 +19,6 @@ canvas {
 
 .ChannelButtons button {
   font-weight: bold;
-  color: #223843;
   cursor: pointer;
   margin: 0 5px;
   border: none;
@@ -31,4 +30,13 @@ canvas {
   background-color: rgba(204, 4, 60, 0.7);
   color: #fff;
   transition: 0.3s;
+}
+
+.selected-button {
+  background-color: rgba(204, 4, 60, 0.7);
+  color: #fff;
+}
+
+.not-selected-button {
+  color: #223843;
 }

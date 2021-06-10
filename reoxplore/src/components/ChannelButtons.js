@@ -18,6 +18,11 @@ export class ChannelButtons extends React.Component {
       return (
         <button
           key={channel.id}
+          className={
+            channel.name === this.props.channelMode
+              ? "selected-button"
+              : "not-selected-button"
+          }
           onClick={(e) => {
             this.props.changeChannel(channel.name, e);
           }}

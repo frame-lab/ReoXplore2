@@ -89,8 +89,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <h1>ReoXplore</h1>
         <h3>Channels</h3>
-        <ChannelButtons changeChannel={this.changeChannel} />
+        <ChannelButtons changeChannel={this.changeChannel} channelMode={this.state.channel}/>
         <P5Wrapper sketch={this.sketch.bind(this)} />
       </div>
     );
