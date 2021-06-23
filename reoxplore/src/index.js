@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = { channel: "sync" };
+    this.state = { channel: "sync", nodes: [], channels: [] };
     this.sketch = this.sketch.bind(this);
     this.changeChannel = this.changeChannel.bind(this);
   }
@@ -19,10 +19,7 @@ class App extends React.Component {
     let count = 1;
     let previous_node;
     let first_node = true;
-    let self = this; //to access this.changeChannel on function main
-
-    let nodes = [];
-    let channels = [];
+    let self = this; //to access this.state.channel on function main
 
     p.setup = () => {
       let canvas = p.createCanvas(800, 400);
@@ -33,12 +30,12 @@ class App extends React.Component {
     p.draw = () => {
       p.background(220);
 
-      for (let i = 0; i < channels.length; i++) {
-        channels[i].display();
+      for (let i = 0; i < self.state.channels.length; i++) {
+        self.state.channels[i].display();
       }
 
-      for (let i = 0; i < nodes.length; i++) {
-        nodes[i].display();
+      for (let i = 0; i < self.state.nodes.length; i++) {
+        self.state.nodes[i].display();
       }
     };
 
@@ -47,13 +44,13 @@ class App extends React.Component {
       let node_clicked = false;
       let new_node_created = false;
 
-      for (let i = 0; i < nodes.length; i++) {
+      for (let i = 0; i < self.state.nodes.length; i++) {
         //checks if a node was clicked
-        if (nodes[i].clicked(p.mouseX, p.mouseY)) {
+        if (self.state.nodes[i].clicked(p.mouseX, p.mouseY)) {
           if (first_node) {
-            previous_node = nodes[i];
+            previous_node = self.state.nodes[i];
           } else {
-            node = nodes[i];
+            node = self.state.nodes[i];
           }
           node_clicked = true;
         }
@@ -61,18 +58,18 @@ class App extends React.Component {
       if (!node_clicked) {
         //create new node
         node = new Node(p, p.mouseX, p.mouseY, count);
-        nodes.push(node);
+        self.setState({ nodes: self.state.nodes.concat(node) });
         new_node_created = true;
       }
 
       if (!first_node) {
         if (!previous_node) {
           //if didnt click on a previous node, get the last one
-          previous_node = nodes[count - 2];
+          previous_node = self.state.nodes[count - 2];
         }
         if (previous_node !== node) {
           let channel = new Channel(p, previous_node, node, self.state.channel);
-          channels.push(channel);
+          self.setState({ channels: self.state.channels.concat(channel) });
         }
         previous_node = null;
       }
@@ -90,12 +87,27 @@ class App extends React.Component {
     return (
       <div>
         <h1>ReoXplore</h1>
-        <h3>Channels</h3>
-        <ChannelButtons
-          changeChannel={this.changeChannel}
-          channelMode={this.state.channel}
-        />
-        <P5Wrapper sketch={this.sketch.bind(this)} />
+        <div className="grid-container">
+          <div>
+            <h3>Channels</h3>
+            <ChannelButtons
+              changeChannel={this.changeChannel}
+              channelMode={this.state.channel}
+            />
+            <P5Wrapper sketch={this.sketch.bind(this)} />
+          </div>
+          <div>
+            <h3>Treo</h3>
+            {this.state.channels.map((channel, i) => {
+              return (
+                <p key={i}>
+                  {channel.channelMode}({channel.startNode.label},
+                  {channel.endNode.label})
+                </p>
+              );
+            })}
+          </div>
+        </div>
       </div>
     );
   }

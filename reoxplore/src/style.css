@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
 
 body {
+  margin: 10px 30px;
   text-align: center;
   font-family: "Noto Sans", sans-serif;
   color: #223843;
@@ -37,4 +38,11 @@ canvas {
 
 .not-selected-button {
   color: #223843;
+}
+
+@media (min-width: 1080px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 800px auto;
+  }
 }
