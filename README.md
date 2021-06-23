@@ -1,9 +1,9 @@
 # ReoXplore2
 
-requirements:
-- install Node.js and npm
+[Click here](http://frame-lab.github.io/ReoXplore2) to see the project!
 
-how to run the project:
-1. clone this repository
-2. `cd ReoXplore2/reoexplore`
-3. `npm start`
+Or if you want to run locally:
+1. install [Node.js and npm](https://nodejs.org/en/)
+2. clone this repository
+3. `cd ReoXplore2/reoexplore`
+4. `npm start`
