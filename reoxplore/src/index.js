@@ -5,6 +5,7 @@ import "./style.css";
 import Node from "./components/Node";
 import Channel from "./components/Channel";
 import { ChannelButtons } from "./components/ChannelButtons";
+import { Treo } from "./components/Treo";
 
 class App extends React.Component {
   constructor() {
@@ -96,17 +97,7 @@ class App extends React.Component {
             />
             <P5Wrapper sketch={this.sketch.bind(this)} />
           </div>
-          <div>
-            <h3>Treo</h3>
-            {this.state.channels.map((channel, i) => {
-              return (
-                <p key={i}>
-                  {channel.channelMode}({channel.startNode.label},
-                  {channel.endNode.label})
-                </p>
-              );
-            })}
-          </div>
+          <Treo channels={this.state.channels} />
         </div>
       </div>
     );
