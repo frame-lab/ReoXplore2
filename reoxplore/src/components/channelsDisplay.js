@@ -19,7 +19,7 @@ export function sync(p5, startNode, endNode, arrowSize) {
   p5.pop();
 }
 
-export function lossy_sync(p5, startNode, endNode, arrowSize) {
+export function lossysync(p5, startNode, endNode, arrowSize) {
   let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
 
   p5.drawingContext.setLineDash([5, 10]);
@@ -97,7 +97,7 @@ export function transform(p5, startNode, endNode, arrowSize) {
   p5.pop();
 }
 
-export function sync_drain(p5, startNode, endNode, arrowSize) {
+export function syncdrain(p5, startNode, endNode, arrowSize) {
   let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
 
   p5.line(startNode.x, startNode.y, endNode.x, endNode.y);
@@ -129,7 +129,7 @@ export function sync_drain(p5, startNode, endNode, arrowSize) {
   p5.pop();
 }
 
-export function async_drain(p5, startNode, endNode, arrowSize) {
+export function asyncdrain(p5, startNode, endNode, arrowSize) {
   let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
   let mediumX = (startNode.x + endNode.x) / 2;
   let mediumY = (startNode.y + endNode.y) / 2;
