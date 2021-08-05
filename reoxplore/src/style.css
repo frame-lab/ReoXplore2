@@ -1,10 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
 
+:root {
+  --dark: #223843;
+  --white: #fff;
+  --red: rgba(204, 4, 60, 0.7);
+}
+
 body {
   margin: 10px 30px;
   text-align: center;
   font-family: "Noto Sans", sans-serif;
-  color: #223843;
+  color: var(--dark);
 }
 
 canvas {
@@ -26,18 +32,18 @@ canvas {
 }
 
 .ChannelButtons button:hover {
-  background-color: rgba(204, 4, 60, 0.7);
-  color: #fff;
+  background-color: var(--red);
+  color: var(--white);
   transition: 0.3s;
 }
 
 .selected-button {
-  background-color: rgba(204, 4, 60, 0.7);
-  color: #fff;
+  background-color: var(--red);
+  color: var(--white);
 }
 
 .not-selected-button {
-  color: #223843;
+  color: var(--dark);
 }
 
 @media (min-width: 1080px) {
