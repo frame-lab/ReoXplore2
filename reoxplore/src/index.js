@@ -11,9 +11,10 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = { channel: "sync", nodes: [], channels: [] };
+    this.state = { channel: "sync", nodes: [], channels: [], treoEntry: [] };
     this.sketch = this.sketch.bind(this);
     this.changeChannel = this.changeChannel.bind(this);
+    this.updateDrawingBasedOnTreo = this.updateDrawingBasedOnTreo.bind(this);
   }
 
   sketch(p) {
@@ -30,6 +31,11 @@ class App extends React.Component {
 
     p.draw = () => {
       p.background(220);
+
+      if (self.state.treoEntry.length > 0) {
+        // add channels and nodes coming from treo
+        addChannelsFromTreo(self.state.treoEntry);
+      }
 
       for (let i = 0; i < self.state.channels.length; i++) {
         self.state.channels[i].display();
@@ -78,10 +84,26 @@ class App extends React.Component {
       if (new_node_created) count++;
       first_node = !first_node;
     }
+
+    function addChannelsFromTreo(treoEntry) {
+      let newNodes = [];
+      let newChannels = [];
+      for (let treo of treoEntry) {
+        let startNode = new Node(p, treo.startNode.x, treo.startNode.y, treo.startNode.label);
+        let endNode = new Node(p, treo.endNode.x, treo.endNode.y, treo.endNode.label);
+        newNodes.push(startNode, endNode);
+        newChannels.push(new Channel(p, startNode, endNode, treo.channelMode));
+      }
+      self.setState({ treoEntry: [], nodes: newNodes, channels: newChannels });
+    }
   }
 
   changeChannel(newMode) {
     this.setState({ channel: newMode });
+  }
+
+  updateDrawingBasedOnTreo(channelsFromTreo) {
+    this.setState({ treoEntry: channelsFromTreo });
   }
 
   render() {
@@ -97,7 +119,10 @@ class App extends React.Component {
             />
             <P5Wrapper sketch={this.sketch.bind(this)} />
           </div>
-          <Treo channels={this.state.channels} />
+          <Treo
+            channels={this.state.channels}
+            updateDrawingBasedOnTreo={this.updateDrawingBasedOnTreo}
+          />
         </div>
       </div>
     );
