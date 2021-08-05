@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 
 :root {
   --dark: #223843;
+  --light: #ededed;
+  --lighter: #fafafa;
   --white: #fff;
   --red: rgba(204, 4, 60, 0.7);
 }
@@ -46,9 +49,40 @@ canvas {
   color: var(--dark);
 }
 
+.Treo textarea {
+  font-family: "Ubuntu Mono", monospace;
+  background-color: var(--lighter);
+  color: var(--dark);
+  border-width: 0 0 2px 2px;
+  border-color: var(--light);
+  border-style: solid;
+  padding: 10px;
+}
+
 @media (min-width: 1080px) {
   .grid-container {
     display: grid;
     grid-template-columns: 800px auto;
+    grid-template-rows: 50px 60px auto;
+  }
+
+  .ChannelButtons {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .p5container {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .treo-title {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .Treo {
+    grid-column: 2;
+    grid-row: 3;
   }
 }

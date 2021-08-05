@@ -111,14 +111,15 @@ class App extends React.Component {
       <div>
         <h1>ReoXplore</h1>
         <div className="grid-container">
-          <div>
-            <h3>Channels</h3>
-            <ChannelButtons
-              changeChannel={this.changeChannel}
-              channelMode={this.state.channel}
-            />
+          <h3>Channels</h3>
+          <ChannelButtons
+            changeChannel={this.changeChannel}
+            channelMode={this.state.channel}
+          />
+          <div className="p5container">
             <P5Wrapper sketch={this.sketch.bind(this)} />
           </div>
+          <h3 className="treo-title">Treo</h3>
           <Treo
             channels={this.state.channels}
             updateDrawingBasedOnTreo={this.updateDrawingBasedOnTreo}

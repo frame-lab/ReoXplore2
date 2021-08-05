@@ -84,8 +84,7 @@ export class Treo extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>Treo</h3>
+      <div className="Treo">
         <textarea
           cols="40"
           rows="10"
