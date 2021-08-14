@@ -4,7 +4,7 @@ import equal from "fast-deep-equal";
 export class Treo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { treo: "" };
+    this.state = { treo: "", isCorrect: true };
     this.changeTreo = this.changeTreo.bind(this);
   }
 
@@ -47,7 +47,12 @@ export class Treo extends React.Component {
         channelMode: line.match(/[a-z]+/)[0],
       });
     }
-    if (readyToDraw) this.props.updateDrawingBasedOnTreo(channels);
+    if (readyToDraw) {
+      this.setState({ isCorrect: true });
+      this.props.updateDrawingBasedOnTreo(channels);
+    } else {
+      this.setState({ isCorrect: false });
+    }
   }
 
   getTreoFromDrawing(startNode, endNode, channelMode) {
@@ -81,6 +86,7 @@ export class Treo extends React.Component {
     return (
       <div className="Treo">
         <textarea
+          className={this.state.isCorrect ? "right" : "wrong"}
           cols="40"
           rows="10"
           value={this.state.treo}

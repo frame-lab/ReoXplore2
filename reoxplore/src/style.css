@@ -7,6 +7,7 @@
   --lighter: #fafafa;
   --white: #fff;
   --red: rgba(204, 4, 60, 0.7);
+  --blue: #096380;
 }
 
 body {
@@ -57,6 +58,16 @@ canvas {
   border-color: var(--light);
   border-style: solid;
   padding: 10px;
+}
+
+.Treo textarea:focus {
+  outline: none;
+}
+.Treo .right:focus {
+  border-color: var(--blue);
+}
+.Treo .wrong {
+  border-color: var(--red);
 }
 
 @media (min-width: 1080px) {
