@@ -57,12 +57,12 @@ export class Treo extends React.Component {
 
   getTreoFromDrawing(startNode, endNode, channelMode) {
     // writes treo to update textarea value
-    let nodes = `(${startNode.label}, ${endNode.label})`;
-    let startPosition = `${Math.trunc(startNode.x)}, ${Math.trunc(
+    const nodes = `(${startNode.label}, ${endNode.label})`;
+    const startPosition = `${Math.trunc(startNode.x)}, ${Math.trunc(
       startNode.y
     )}`;
-    let endPosition = `${Math.trunc(endNode.x)}, ${Math.trunc(endNode.y)}`;
-    let newTreo = `${channelMode}${nodes} # (${startPosition}) (${endPosition}); \n`;
+    const endPosition = `${Math.trunc(endNode.x)}, ${Math.trunc(endNode.y)}`;
+    const newTreo = `${channelMode}${nodes} # (${startPosition}) (${endPosition}); \n`;
     return newTreo;
   }
 

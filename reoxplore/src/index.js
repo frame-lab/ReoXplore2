@@ -21,10 +21,10 @@ class App extends React.Component {
     let count = 1;
     let previous_node;
     let first_node = true;
-    let self = this; //to access this.state.channel on function main
+    const self = this; //to access this.state.channel on function main
 
     p.setup = () => {
-      let canvas = p.createCanvas(800, 400);
+      const canvas = p.createCanvas(800, 400);
       canvas.mouseClicked(main);
       p.textSize(12);
     };
@@ -75,7 +75,7 @@ class App extends React.Component {
           previous_node = self.state.nodes[count - 2];
         }
         if (previous_node !== node) {
-          let channel = new Channel(p, previous_node, node, self.state.channel);
+          const channel = new Channel(p, previous_node, node, self.state.channel);
           self.setState({ channels: self.state.channels.concat(channel) });
         }
         previous_node = null;
@@ -89,8 +89,8 @@ class App extends React.Component {
       let newNodes = [];
       let newChannels = [];
       for (let treo of treoEntry) {
-        let startNode = new Node(p, treo.startNode.x, treo.startNode.y, treo.startNode.label);
-        let endNode = new Node(p, treo.endNode.x, treo.endNode.y, treo.endNode.label);
+        const startNode = new Node(p, treo.startNode.x, treo.startNode.y, treo.startNode.label);
+        const endNode = new Node(p, treo.endNode.x, treo.endNode.y, treo.endNode.label);
         newNodes.push(startNode, endNode);
         newChannels.push(new Channel(p, startNode, endNode, treo.channelMode));
       }

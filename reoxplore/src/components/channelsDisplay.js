@@ -1,7 +1,7 @@
 // Functions for drawing the channels
 
 export function sync(p5, startNode, endNode, arrowSize) {
-  let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
+  const angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
 
   p5.line(startNode.x, startNode.y, endNode.x, endNode.y);
 
@@ -20,7 +20,7 @@ export function sync(p5, startNode, endNode, arrowSize) {
 }
 
 export function lossysync(p5, startNode, endNode, arrowSize) {
-  let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
+  const angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
 
   p5.drawingContext.setLineDash([5, 10]);
   p5.line(startNode.x, startNode.y, endNode.x, endNode.y);
@@ -41,12 +41,12 @@ export function lossysync(p5, startNode, endNode, arrowSize) {
 }
 
 export function fifo(p5, startNode, endNode, arrowSize) {
-  let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
-  let mediumX = (startNode.x + endNode.x) / 2;
-  let mediumY = (startNode.y + endNode.y) / 2;
+  const angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
+  const mediumX = (startNode.x + endNode.x) / 2;
+  const mediumY = (startNode.y + endNode.y) / 2;
 
-  let rectWidth = arrowSize;
-  let rectHeight = arrowSize * 2;
+  const rectWidth = arrowSize;
+  const rectHeight = arrowSize * 2;
 
   p5.push(); //start new drawing state
   p5.translate(mediumX, mediumY); //translates to middle of the line
@@ -71,9 +71,9 @@ export function fifo(p5, startNode, endNode, arrowSize) {
 }
 
 export function transform(p5, startNode, endNode, arrowSize) {
-  let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
-  let mediumX = (startNode.x + endNode.x) / 2;
-  let mediumY = (startNode.y + endNode.y) / 2;
+  const angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
+  const mediumX = (startNode.x + endNode.x) / 2;
+  const mediumY = (startNode.y + endNode.y) / 2;
 
   p5.push();
   p5.translate(mediumX, mediumY);
@@ -98,7 +98,7 @@ export function transform(p5, startNode, endNode, arrowSize) {
 }
 
 export function syncdrain(p5, startNode, endNode, arrowSize) {
-  let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
+  const angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
 
   p5.line(startNode.x, startNode.y, endNode.x, endNode.y);
 
@@ -130,9 +130,9 @@ export function syncdrain(p5, startNode, endNode, arrowSize) {
 }
 
 export function asyncdrain(p5, startNode, endNode, arrowSize) {
-  let angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
-  let mediumX = (startNode.x + endNode.x) / 2;
-  let mediumY = (startNode.y + endNode.y) / 2;
+  const angle = p5.atan2(startNode.y - endNode.y, startNode.x - endNode.x); //angle of the line
+  const mediumX = (startNode.x + endNode.x) / 2;
+  const mediumY = (startNode.y + endNode.y) / 2;
 
   p5.line(startNode.x, startNode.y, endNode.x, endNode.y);
 

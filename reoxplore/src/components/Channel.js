@@ -13,7 +13,7 @@ class Channel {
     this.p.strokeWeight(2);
     this.p.fill(160);
 
-    let arrowSize = 10;
+    const arrowSize = 10;
 
     channelsDisplay[this.channelMode](
       this.p,

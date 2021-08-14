@@ -16,7 +16,7 @@ class Node {
   }
 
   clicked(px, py) {
-    let d = this.p.dist(px, py, this.x, this.y);
+    const d = this.p.dist(px, py, this.x, this.y);
     if (d <= this.radius) {
       return true;
     }
