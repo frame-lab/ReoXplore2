@@ -17,39 +17,34 @@ export class Treo extends React.Component {
     let channels = [];
     let readyToDraw = true;
 
-    let lines = newTreo
+    const lines = newTreo
       .replace(/\n/g, "") // remove breaklines
       .replace(/\s/g, "") // remove whitespaces
       .split(";") // split by ;
       .slice(0, -1); // also remove the last element because it's empty
 
     for (let line of lines) {
-      let splitedLine = line.split("(");
-      let channelMode = splitedLine[0];
-      let splitedLabel = splitedLine[1].replace(/\)|#/g, "").split(",");
-      let startPosition = splitedLine[2].replace(/\)/g, "").split(",");
-      let endPosition = splitedLine[3].replace(/\)/g, "").split(",");
-      let startLabel = splitedLabel[0];
-      let endLabel = splitedLabel[1];
-
-      if (startLabel === "" || endLabel === "") {
-        // TODO: create other conditions if other things are wrong
+      const regex = /[a-z]+\(\d+,\d+\)#\(\d+,\d+\)\(\d+,\d+\)/;
+      // channelMode(startLabel,endLabel)#(startPosition.x, startPosition.y)(endPosition.x, endPosition.y)
+      if (!line.match(regex)) {
+        console.log(`fix ${line}`);
         readyToDraw = false;
         break;
       }
 
+      const matchedNumbers = line.match(/\d+/g);
       channels.push({
         startNode: {
-          x: Number(startPosition[0]),
-          y: Number(startPosition[1]),
-          label: Number(startLabel),
+          x: Number(matchedNumbers[2]),
+          y: Number(matchedNumbers[3]),
+          label: Number(matchedNumbers[0]),
         },
         endNode: {
-          x: Number(endPosition[0]),
-          y: Number(endPosition[1]),
-          label: Number(endLabel),
+          x: Number(matchedNumbers[4]),
+          y: Number(matchedNumbers[5]),
+          label: Number(matchedNumbers[1]),
         },
-        channelMode: channelMode,
+        channelMode: line.match(/[a-z]+/)[0],
       });
     }
     if (readyToDraw) this.props.updateDrawingBasedOnTreo(channels);
