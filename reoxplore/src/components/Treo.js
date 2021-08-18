@@ -1,5 +1,14 @@
 import React from "react";
 import equal from "fast-deep-equal";
+import * as channelsDisplay from "./channelsDisplay";
+
+function getChannelNames() {
+  let channelNames = [];
+  for (let channel in channelsDisplay) {
+    channelNames.push(channel);
+  }
+  return channelNames;
+}
 
 export class Treo extends React.Component {
   constructor(props) {
@@ -14,6 +23,7 @@ export class Treo extends React.Component {
   }
 
   buildChannelsFromTreo(newTreo) {
+    const channelNames = getChannelNames();
     let channels = [];
     let readyToDraw = true;
 
@@ -31,6 +41,12 @@ export class Treo extends React.Component {
         readyToDraw = false;
         break;
       }
+      const channelMode = line.match(/[a-z]+/)[0];
+      if (!channelNames.includes(channelMode)) {
+        console.log(`${channelMode} is not a valid channel`);
+        readyToDraw = false;
+        break;
+      }
 
       const matchedNumbers = line.match(/\d+/g);
       channels.push({
@@ -44,7 +60,7 @@ export class Treo extends React.Component {
           y: Number(matchedNumbers[5]),
           label: Number(matchedNumbers[1]),
         },
-        channelMode: line.match(/[a-z]+/)[0],
+        channelMode: channelMode,
       });
     }
     if (readyToDraw) {
