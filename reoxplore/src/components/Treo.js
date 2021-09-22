@@ -69,6 +69,7 @@ export class Treo extends React.Component {
     function updateNodePosition(i, c, oneNode, otherNode, oneNodeLines) {
       // compares old and new treos and updates the oneNode's position if label changes
       // so nodes with the same label have the same position
+      if (!oneNodeLines) return;
       if (c[oneNode].label !== oldChannels[i][oneNode].label) {
         for (let line of oneNodeLines){ // lines where oneNode is referenced in treo
           if (line !== i) {
@@ -100,6 +101,7 @@ export class Treo extends React.Component {
     if (readyToDraw) {
       this.setState({ isCorrect: true });
       this.props.updateDrawingBasedOnTreo(channels);
+      this.updateNodesReference(channels);
     } else {
       this.setState({ isCorrect: false });
     }
@@ -117,12 +119,20 @@ export class Treo extends React.Component {
     return newTreo;
   }
 
-  addNodeReference(label, lineNumber) {
+  updateNodesReference(channels) {
     // nodesReference indicates which lines this node was referenced in the treo
-    let newNodesReference = this.state.nodesReference;
-    if (!(label in this.state.nodesReference))
-      newNodesReference[label] = new Set();
-    newNodesReference[label].add(lineNumber);
+    function addNodeReference(label) {
+      if (!(label in newNodesReference))
+        newNodesReference[label] = new Set();
+      newNodesReference[label].add(lineNumber);
+    }
+    let lineNumber = 0;
+    let newNodesReference = {};
+    for (let c of channels) {
+      addNodeReference(c.startNode.label);
+      addNodeReference(c.endNode.label);
+      lineNumber++;
+    }
     this.setState({ nodesReference: newNodesReference });
   }
 
@@ -131,18 +141,14 @@ export class Treo extends React.Component {
   componentDidUpdate(prevProps) {
     if (!equal(this.props.channels, prevProps.channels)) {
       let newTreo = "";
-      let lineNumber = 0;
-      this.setState({ nodesReference: {} });
       for (let c of this.props.channels) {
         newTreo += this.getTreoFromDrawing(
           c.startNode,
           c.endNode,
           c.channelMode
         );
-        this.addNodeReference(c.startNode.label, lineNumber);
-        this.addNodeReference(c.endNode.label, lineNumber);
-        lineNumber++;
       }
+      this.updateNodesReference(this.props.channels)
       this.setState({ treo: newTreo });
     }
   }
