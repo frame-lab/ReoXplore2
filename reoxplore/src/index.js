@@ -67,13 +67,10 @@ class App extends React.Component {
         node = new Node(p, p.mouseX, p.mouseY, count);
         self.setState({ nodes: self.state.nodes.concat(node) });
         new_node_created = true;
+        if (!previous_node) previous_node = node;
       }
 
       if (!first_node) {
-        if (!previous_node) {
-          //if didnt click on a previous node, get the last one
-          previous_node = self.state.nodes[count - 2];
-        }
         if (previous_node !== node) {
           const channel = new Channel(p, previous_node, node, self.state.channel);
           self.setState({ channels: self.state.channels.concat(channel) });
