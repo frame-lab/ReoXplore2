@@ -1,4 +1,4 @@
-import * as channelsDisplay from "./channelsDisplay";
+import * as channelsDisplay from "../pub";
 
 class Channel {
   constructor(p, startNode, endNode, channelMode) {

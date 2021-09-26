@@ -1,5 +1,5 @@
 import React from "react";
-import * as channelsDisplay from "./channelsDisplay";
+import * as channelsDisplay from "../pub";
 
 export class ChannelButtons extends React.Component {
   getChannelNames() {

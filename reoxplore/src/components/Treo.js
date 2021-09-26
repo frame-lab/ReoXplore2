@@ -1,6 +1,6 @@
 import React from "react";
 import equal from "fast-deep-equal";
-import * as channelsDisplay from "./channelsDisplay";
+import * as channelsDisplay from "../pub";
 
 function getChannelNames() {
   let channelNames = [];
