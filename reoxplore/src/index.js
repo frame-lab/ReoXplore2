@@ -4,6 +4,7 @@ import P5Wrapper from "react-p5-wrapper";
 import "./style.css";
 import Node from "./components/Node";
 import Channel from "./components/Channel";
+import getUniqueNodesFromArray from "./utils/getUniqueNodesFromArray";
 import { ChannelButtons } from "./components/ChannelButtons";
 import { Treo } from "./components/Treo";
 
@@ -91,7 +92,8 @@ class App extends React.Component {
         newNodes.push(startNode, endNode);
         newChannels.push(new Channel(p, startNode, endNode, treo.channelMode));
       }
-      self.setState({ treoEntry: [], nodes: newNodes, channels: newChannels });
+      const newUniqueNodes = getUniqueNodesFromArray(newNodes);
+      self.setState({ treoEntry: [], nodes: newUniqueNodes, channels: newChannels });
     }
   }
 
@@ -118,6 +120,7 @@ class App extends React.Component {
           </div>
           <h3 className="treo-title">Treo</h3>
           <Treo
+            nodes={this.state.nodes}
             channels={this.state.channels}
             updateDrawingBasedOnTreo={this.updateDrawingBasedOnTreo}
           />
