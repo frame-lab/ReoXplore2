@@ -6,7 +6,7 @@ import Node from "./components/Node";
 import Channel from "./components/Channel";
 import { ChannelButtons } from "./components/ChannelButtons";
 import { Treo } from "./components/Treo";
-
+import ReoToNuXmv from "./components/ReoToNuXmv";
 class App extends React.Component {
   constructor() {
     super();
@@ -122,6 +122,7 @@ class App extends React.Component {
             updateDrawingBasedOnTreo={this.updateDrawingBasedOnTreo}
           />
         </div>
+        <ReoToNuXmv />
       </div>
     );
   }
