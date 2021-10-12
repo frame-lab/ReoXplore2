@@ -141,8 +141,9 @@ export class Treo extends React.Component {
           c.channelMode
         );
       }
-      newTreo = nodesPositions + newTreo;
-      this.setState({ treo: newTreo });
+      this.props.saveTreoCode(newTreo);
+      const treoWithComments = nodesPositions + newTreo;
+      this.setState({ treo: treoWithComments });
     }
   }
 

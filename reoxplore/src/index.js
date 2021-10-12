@@ -12,10 +12,11 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = { channel: "sync", nodes: [], channels: [], treoEntry: [] };
+    this.state = { channel: "sync", nodes: [], channels: [], treoEntry: [], treoCode: "" };
     this.sketch = this.sketch.bind(this);
     this.changeChannel = this.changeChannel.bind(this);
     this.updateDrawingBasedOnTreo = this.updateDrawingBasedOnTreo.bind(this);
+    this.saveTreoCode = this.saveTreoCode.bind(this);
   }
 
   sketch(p) {
@@ -105,6 +106,10 @@ class App extends React.Component {
     this.setState({ treoEntry: channelsFromTreo });
   }
 
+  saveTreoCode(treo) {
+    this.setState({ treoCode: treo });
+  }
+
   render() {
     return (
       <div>
@@ -123,9 +128,10 @@ class App extends React.Component {
             nodes={this.state.nodes}
             channels={this.state.channels}
             updateDrawingBasedOnTreo={this.updateDrawingBasedOnTreo}
+            saveTreoCode={this.saveTreoCode}
           />
         </div>
-        <ReoToNuXmv />
+        <ReoToNuXmv treo={this.state.treoCode} />
       </div>
     );
   }

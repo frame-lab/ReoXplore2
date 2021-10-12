@@ -1,13 +1,5 @@
 import React from "react";
-
 const http = require("http");
-
-// TODO: get treo and pass it as a parameter for the request
-const data = new TextEncoder().encode(
-  JSON.stringify({
-    content: "sync(1,2)",
-  })
-);
 
 const options = {
   hostname: "localhost",
@@ -16,7 +8,7 @@ const options = {
   method: "POST",
 };
 
-async function makeRequest() {
+async function makeRequest(data) {
   return await new Promise((resolve, reject) => {
     const req = http.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);
@@ -45,9 +37,14 @@ class ReoToNuXmv extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  async handleClick() {
+  async handleClick(treo) {
     console.log("calling Reo2nuXmv");
-    let nuXmvCode = await makeRequest();
+    const treoData = new TextEncoder().encode(
+      JSON.stringify({
+        content: treo,
+      })
+    );
+    const nuXmvCode = await makeRequest(treoData);
     this.setState({ nuXmvCode: nuXmvCode });
   }
 
@@ -56,7 +53,7 @@ class ReoToNuXmv extends React.Component {
       <div>
         <button
           onClick={(e) => {
-            this.handleClick("", e);
+            this.handleClick(this.props.treo, e);
           }}
         >
           Generate nuXmv code
