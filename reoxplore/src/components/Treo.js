@@ -23,6 +23,7 @@ export class Treo extends React.Component {
 
   parseTreo(treo) {
     const channelNames = getChannelNames();
+    let nodes = {};
     let channels = [];
     let readyToDraw = true;
 
@@ -33,8 +34,23 @@ export class Treo extends React.Component {
       .slice(0, -1); // also remove the last element because it's empty
 
     for (let line of lines) {
-      const regex = /[a-z]+\(\d+,\d+\)#\(\d+,\d+\)\(\d+,\d+\)/;
-      // channelMode(startLabel,endLabel)#(startPosition.x, startPosition.y)(endPosition.x, endPosition.y)
+      const commentRegex = /#.*/;
+      if (line.match(commentRegex)) {
+        const nodeCommentRegex = /#\d+\(\d+,\d+\)/; // #nodeLabel(node.x,node.y)
+        if (line.match(nodeCommentRegex)) {
+          const nodeLabel = line.match(/#\d+/)[0].replace("#", "");
+          const nodeX = line.match(/\(\d+/)[0].replace("(", "");
+          const nodeY = line.match(/,\d+/)[0].replace(",", "");
+          nodes[nodeLabel] = {x: Number(nodeX), y: Number(nodeY)};
+          continue;
+        } else {
+          console.log(`fix ${line}`);
+          readyToDraw = false;
+          break;
+        }
+      }
+      
+      const regex = /[a-z]+\(\d+,\d+\)/; // channelMode(startLabel,endLabel)
       if (!line.match(regex)) {
         console.log(`fix ${line}`);
         readyToDraw = false;
@@ -48,16 +64,23 @@ export class Treo extends React.Component {
       }
 
       const matchedNumbers = line.match(/\d+/g);
+      const startNodeLabel = Number(matchedNumbers[0]);
+      const endNodeLabel = Number(matchedNumbers[1]);
+      if (!(startNodeLabel in nodes) || !(endNodeLabel in nodes) ) {
+        console.log(`fix nodes positions`);
+        readyToDraw = false;
+        break;
+      }
       channels.push({
         startNode: {
-          x: Number(matchedNumbers[2]),
-          y: Number(matchedNumbers[3]),
-          label: Number(matchedNumbers[0]),
+          x: nodes[startNodeLabel].x,
+          y: nodes[startNodeLabel].y,
+          label: startNodeLabel,
         },
         endNode: {
-          x: Number(matchedNumbers[4]),
-          y: Number(matchedNumbers[5]),
-          label: Number(matchedNumbers[1]),
+          x: nodes[endNodeLabel].x,
+          y: nodes[endNodeLabel].y,
+          label: endNodeLabel,
         },
         channelMode: channelMode,
       });
@@ -65,43 +88,12 @@ export class Treo extends React.Component {
     return {readyToDraw, channels};
   }
 
-  getUpdatedChannels(oldChannels, newChannels) {
-    function updateNodePosition(i, c, oneNode, otherNode, oneNodeLines) {
-      // compares old and new treos and updates the oneNode's position if label changes
-      // so nodes with the same label have the same position
-      if (!oneNodeLines) return;
-      if (c[oneNode].label !== oldChannels[i][oneNode].label) {
-        for (let line of oneNodeLines){ // lines where oneNode is referenced in treo
-          if (line !== i) {
-            let nodeBefore;
-            if (c[oneNode].label === newChannels[line][oneNode].label)
-              nodeBefore = newChannels[line][oneNode];
-            else if (c[oneNode].label === newChannels[line][otherNode].label)
-              nodeBefore = newChannels[line][otherNode];
-            c[oneNode] = {...c[oneNode], x: nodeBefore.x, y: nodeBefore.y};
-          }
-        }
-      }
-    }
-    let line = 0;
-    for (let c of newChannels) {
-      updateNodePosition(line, c, "endNode", "startNode", this.state.nodesReference[c.endNode.label]);
-      updateNodePosition(line, c, "startNode", "endNode", this.state.nodesReference[c.startNode.label]);
-      line++;
-    }
-    return newChannels;
-  }
-
   buildChannelsFromTreo(newTreo) {
-    const oldChannels = this.props.channels;
     let {readyToDraw, channels} = this.parseTreo(newTreo);
-
-    channels = this.getUpdatedChannels(oldChannels, channels);
 
     if (readyToDraw) {
       this.setState({ isCorrect: true });
       this.props.updateDrawingBasedOnTreo(channels);
-      this.updateNodesReference(channels);
     } else {
       this.setState({ isCorrect: false });
     }
@@ -109,37 +101,38 @@ export class Treo extends React.Component {
   }
 
   getTreoFromDrawing(startNode, endNode, channelMode) {
-    // writes treo to update textarea value
+     /**
+     * Get Treo of a drawing's channel to update textarea value
+     * @param startNode the first Node object of the channel
+     * @param endNode the second Node object of the channel
+     * @param channelMode the channel mode
+     * @returns a string with this channel treo
+     */
     const nodes = `(${startNode.label}, ${endNode.label})`;
-    const startPosition = `${Math.trunc(startNode.x)}, ${Math.trunc(
-      startNode.y
-    )}`;
-    const endPosition = `${Math.trunc(endNode.x)}, ${Math.trunc(endNode.y)}`;
-    const newTreo = `${channelMode}${nodes} # (${startPosition}) (${endPosition}); \n`;
-    return newTreo;
+    const treo = `${channelMode}${nodes};\n`;
+    return treo;
   }
 
-  updateNodesReference(channels) {
-    // nodesReference indicates which lines this node was referenced in the treo
-    function addNodeReference(label) {
-      if (!(label in newNodesReference))
-        newNodesReference[label] = new Set();
-      newNodesReference[label].add(lineNumber);
+  getNodesPositionsFromDrawing(nodes) {
+    /**
+     * Get the positions of the drawing's nodes to show in the Treo textarea as comments
+     * @param nodes list of Nodes objects
+     * @returns a string with all the nodes labels and theirs positions
+     */
+    let nodesPositions = "";
+    for (let n of nodes) {
+      const x = Math.trunc(n.x);
+      const y = Math.trunc(n.y);
+      nodesPositions += `# ${n.label} (${x}, ${y});\n`
     }
-    let lineNumber = 0;
-    let newNodesReference = {};
-    for (let c of channels) {
-      addNodeReference(c.startNode.label);
-      addNodeReference(c.endNode.label);
-      lineNumber++;
-    }
-    this.setState({ nodesReference: newNodesReference });
+    return nodesPositions + "\n";
   }
 
   // componentDidUpdate is triggered when either the props or the state has changed
   // to not enter a loop, we need to verify if the props changed before updating again
   componentDidUpdate(prevProps) {
     if (!equal(this.props.channels, prevProps.channels)) {
+      let nodesPositions = this.getNodesPositionsFromDrawing(this.props.nodes);
       let newTreo = "";
       for (let c of this.props.channels) {
         newTreo += this.getTreoFromDrawing(
@@ -148,7 +141,7 @@ export class Treo extends React.Component {
           c.channelMode
         );
       }
-      this.updateNodesReference(this.props.channels)
+      newTreo = nodesPositions + newTreo;
       this.setState({ treo: newTreo });
     }
   }
