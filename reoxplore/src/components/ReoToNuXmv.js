@@ -4,18 +4,17 @@ const http = require("http");
 const options = {
   hostname: "localhost",
   port: 8081,
-  path: "/nuXmv/compact", //TODO: pass path as parameter
   method: "POST",
 };
 
-async function makeRequest(data) {
+async function makeRequest(data, path) {
+  options["path"] = path;
   return await new Promise((resolve, reject) => {
     const req = http.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);
 
       res.on("data", (d) => {
-        let dataString = new TextDecoder().decode(d);
-        console.log(dataString);
+        const dataString = new TextDecoder().decode(d);
         resolve(dataString);
       });
     });
@@ -37,14 +36,13 @@ class ReoToNuXmv extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  async handleClick(treo) {
-    console.log("calling Reo2nuXmv");
+  async handleClick(treo, path) {
     const treoData = new TextEncoder().encode(
       JSON.stringify({
         content: treo,
       })
     );
-    const nuXmvCode = await makeRequest(treoData);
+    const nuXmvCode = await makeRequest(treoData, path);
     // TODO: verify request success
     this.setState({ nuXmvCode: nuXmvCode });
   }
@@ -55,7 +53,7 @@ class ReoToNuXmv extends React.Component {
         <div>
           <button
             onClick={(e) => {
-              this.handleClick(this.props.treo, e);
+              this.handleClick(this.props.treo, "/nuXmv/compact", e);
             }}
           >
             Generate nuXmv compact code
