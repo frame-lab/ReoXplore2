@@ -112,9 +112,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <main>
         <h1>ReoXplore</h1>
-        <div className="grid-container">
+        <section className="grid-container">
           <h3>Channels</h3>
           <ChannelButtons
             changeChannel={this.changeChannel}
@@ -130,9 +130,12 @@ class App extends React.Component {
             updateDrawingBasedOnTreo={this.updateDrawingBasedOnTreo}
             saveTreoCode={this.saveTreoCode}
           />
-        </div>
-        <ReoToNuXmv treo={this.state.treoCode} />
-      </div>
+        </section>
+        <section className="options">
+          <h3>Options</h3>
+          <ReoToNuXmv treo={this.state.treoCode} />
+        </section>
+      </main>
     );
   }
 }

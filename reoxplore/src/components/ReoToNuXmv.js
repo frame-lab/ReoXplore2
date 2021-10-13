@@ -4,7 +4,7 @@ const http = require("http");
 const options = {
   hostname: "localhost",
   port: 8081,
-  path: "/nuXmv/compact",
+  path: "/nuXmv/compact", //TODO: pass path as parameter
   method: "POST",
 };
 
@@ -45,20 +45,32 @@ class ReoToNuXmv extends React.Component {
       })
     );
     const nuXmvCode = await makeRequest(treoData);
+    // TODO: verify request success
     this.setState({ nuXmvCode: nuXmvCode });
   }
 
   render() {
     return (
-      <div>
-        <button
-          onClick={(e) => {
-            this.handleClick(this.props.treo, e);
-          }}
-        >
-          Generate nuXmv code
-        </button>
-        {/* TODO: show nuXmv code */}
+      <div className="options-container">
+        <div>
+          <button
+            onClick={(e) => {
+              this.handleClick(this.props.treo, e);
+            }}
+          >
+            Generate nuXmv compact code
+          </button>
+        </div>
+        <div className="result-container">
+          {this.state.nuXmvCode && (
+            <textarea
+              readOnly
+              cols="80"
+              rows="20"
+              value={this.state.nuXmvCode}
+            ></textarea>
+          )}
+        </div>
       </div>
     );
   }

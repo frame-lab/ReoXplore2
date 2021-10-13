@@ -26,7 +26,7 @@ canvas {
   margin: 10px 0;
 }
 
-.ChannelButtons button {
+button {
   font-weight: bold;
   cursor: pointer;
   margin: 0 5px;
@@ -35,7 +35,7 @@ canvas {
   transition: 0.3s;
 }
 
-.ChannelButtons button:hover {
+button:hover {
   background-color: var(--red);
   color: var(--white);
   transition: 0.3s;
@@ -50,7 +50,7 @@ canvas {
   color: var(--dark);
 }
 
-.Treo textarea {
+textarea {
   font-family: "Ubuntu Mono", monospace;
   background-color: var(--lighter);
   color: var(--dark);
@@ -60,7 +60,7 @@ canvas {
   padding: 10px;
 }
 
-.Treo textarea:focus {
+textarea:focus {
   outline: none;
 }
 .Treo .right:focus {
@@ -69,6 +69,38 @@ canvas {
 .Treo .wrong {
   border-color: var(--red);
 }
+
+/* options section */
+.options {
+  width: 90%;
+  margin: 50px auto;
+  text-align: left;
+}
+
+.options-container {
+  display: flex;
+}
+
+.options button {
+  margin-bottom: 10px;
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+.options button:hover {
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.options .result-container {
+  margin: 0 auto;
+}
+
+.options textarea {
+  margin: 0;
+  width: 100%;
+}
+/* end options section */
 
 @media (min-width: 1080px) {
   .grid-container {
