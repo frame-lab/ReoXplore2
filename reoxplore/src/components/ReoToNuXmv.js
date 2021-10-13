@@ -58,6 +58,13 @@ class ReoToNuXmv extends React.Component {
           >
             Generate nuXmv compact code
           </button>
+          <button
+            onClick={(e) => {
+              this.handleClick(this.props.treo, "/nuXmv/components", e);
+            }}
+          >
+            Generate nuXmv components code
+          </button>
         </div>
         <div className="result-container">
           {this.state.nuXmvCode && (

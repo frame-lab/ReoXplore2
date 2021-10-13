@@ -82,6 +82,7 @@ textarea:focus {
 }
 
 .options button {
+  display: block;
   margin-bottom: 10px;
   color: var(--dark);
   background-color: var(--light);
