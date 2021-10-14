@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 
 :root {
   --dark: #223843;
@@ -95,6 +95,11 @@ textarea:focus {
 
 .options .result-container {
   margin: 0 auto;
+}
+
+.options .result-container h4 {
+  margin-top: 0;
+  text-align: center;
 }
 
 .options textarea {
