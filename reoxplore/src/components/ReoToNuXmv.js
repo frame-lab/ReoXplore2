@@ -1,38 +1,9 @@
 import React from "react";
-const http = require("http");
-
-const options = {
-  hostname: "localhost",
-  port: 8081,
-  method: "POST",
-};
-
-async function makeRequest(data, path) {
-  options["path"] = path;
-  return await new Promise((resolve, reject) => {
-    const req = http.request(options, (res) => {
-      console.log(`statusCode: ${res.statusCode}`);
-
-      res.on("data", (d) => {
-        const dataString = new TextDecoder().decode(d);
-        resolve(dataString);
-      });
-    });
-
-    req.on("error", (error) => {
-      console.error(error);
-      reject(error);
-    });
-
-    req.write(data);
-    req.end();
-  });
-}
-
+import makeRequest from "../utils/makeRequest";
 class ReoToNuXmv extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { nuXmvCode: "" };
+    this.state = { resultCode: "" };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -42,9 +13,11 @@ class ReoToNuXmv extends React.Component {
         content: treo,
       })
     );
-    const nuXmvCode = await makeRequest(treoData, path);
-    // TODO: verify request success
-    this.setState({ nuXmvCode: nuXmvCode });
+    const response = await makeRequest(treoData, path);
+    if (response.status == 200) this.setState({ resultCode: response.data });
+    else
+      this.setState({ resultCode: "Error. Please verify if treo is correct." });
+    console.log(response);
   }
 
   render() {
@@ -67,12 +40,12 @@ class ReoToNuXmv extends React.Component {
           </button>
         </div>
         <div className="result-container">
-          {this.state.nuXmvCode && (
+          {this.state.resultCode && (
             <textarea
               readOnly
               cols="80"
               rows="20"
-              value={this.state.nuXmvCode}
+              value={this.state.resultCode}
             ></textarea>
           )}
         </div>
