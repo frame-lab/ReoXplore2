@@ -4,13 +4,13 @@ import makeRequest from "../utils/makeRequest";
 class TreoToCustomLanguage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { resultTitle: "", resultCode: "" };
+    this.state = { resultTitle: "", resultCode: "", resultError: "" };
     this.handleClick = this.handleClick.bind(this);
   }
 
   async handleClick(treo, path, title) {
     if (!treo) {
-      this.setState({ resultCode: "Error. Treo is empty." });
+      this.setState({ resultError: "Error. Treo is empty." });
       return;
     }
     const treoData = new TextEncoder().encode(
@@ -20,9 +20,15 @@ class TreoToCustomLanguage extends React.Component {
     );
     const response = await makeRequest(treoData, path);
     if (response.status === 200)
-      this.setState({ resultCode: response.data, resultTitle: title });
+      this.setState({
+        resultCode: response.data,
+        resultTitle: title,
+        resultError: "",
+      });
     else
-      this.setState({ resultCode: "Error. Please verify if treo is correct." });
+      this.setState({
+        resultError: "Error. Please verify if treo is correct.",
+      });
     console.log(response);
   }
 
@@ -53,19 +59,23 @@ class TreoToCustomLanguage extends React.Component {
             "NuXmv Components"
           )}
         </div>
-        <div className="result-container">
-          {this.state.resultCode && (
-            <div>
-              <h4>{this.state.resultTitle}</h4>
-              <textarea
-                readOnly
-                cols="80"
-                rows="20"
-                value={this.state.resultCode}
-              ></textarea>
-            </div>
-          )}
-        </div>
+        {this.state.resultError ? (
+          <p className="error-msg">{this.state.resultError}</p>
+        ) : (
+          <div className="result-container">
+            {this.state.resultCode && (
+              <div>
+                <h4>{this.state.resultTitle}</h4>
+                <textarea
+                  readOnly
+                  cols="80"
+                  rows="20"
+                  value={this.state.resultCode}
+                ></textarea>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }

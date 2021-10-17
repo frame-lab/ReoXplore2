@@ -93,6 +93,13 @@ textarea:focus {
   color: var(--white);
 }
 
+.options .error-msg {
+  width: 50%;
+  font-weight: bold;
+  text-align: center;
+  color: var(--red);
+}
+
 .options .result-container {
   margin: 0 auto;
 }
