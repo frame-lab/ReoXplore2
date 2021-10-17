@@ -7,7 +7,7 @@ import Channel from "./components/Channel";
 import getUniqueNodesFromArray from "./utils/getUniqueNodesFromArray";
 import { ChannelButtons } from "./components/ChannelButtons";
 import { Treo } from "./components/Treo";
-import ReoToNuXmv from "./components/ReoToNuXmv";
+import TreoToCustomLanguage from "./components/TreoToCustomLanguage";
 class App extends React.Component {
   constructor() {
     super();
@@ -133,7 +133,7 @@ class App extends React.Component {
         </section>
         <section className="options">
           <h3>Options</h3>
-          <ReoToNuXmv treo={this.state.treoCode} />
+          <TreoToCustomLanguage treo={this.state.treoCode} />
         </section>
       </main>
     );
