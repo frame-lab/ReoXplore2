@@ -12,7 +12,15 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = { channel: "sync", nodes: [], channels: [], treoEntry: [], treoCode: "" };
+    this.state = {
+      channel: "sync",
+      nodes: [],
+      channels: [],
+      treoEntry: [],
+      treoCode: "",
+      canvasX: 800,
+      canvasY: 400,
+    };
     this.sketch = this.sketch.bind(this);
     this.changeChannel = this.changeChannel.bind(this);
     this.updateDrawingBasedOnTreo = this.updateDrawingBasedOnTreo.bind(this);
@@ -26,13 +34,23 @@ class App extends React.Component {
     const self = this; //to access this.state.channel on function main
 
     p.setup = () => {
-      const canvas = p.createCanvas(800, 400);
+      const canvas = p.createCanvas(this.state.canvasX, this.state.canvasY);
       canvas.mouseClicked(main);
       p.textSize(12);
     };
 
+    p.mouseDragged = () => {
+      const mouseInResizeArea = p.mouseX > this.state.canvasX - 25 && p.mouseY > this.state.canvasY - 25;
+      const canvasMaxWidth = p.mouseX >= 860;
+      if (mouseInResizeArea && !canvasMaxWidth) {
+        p.resizeCanvas(p.mouseX, p.mouseY);
+        this.setState({ canvasX: p.mouseX, canvasY: p.mouseY });
+      }
+    };
+
     p.draw = () => {
       p.background(220);
+      drawResizeCanvasIcon(self.state.canvasX, self.state.canvasY);
 
       if (self.state.treoEntry.length > 0) {
         // add channels and nodes coming from treo
@@ -96,6 +114,13 @@ class App extends React.Component {
       const newUniqueNodes = getUniqueNodesFromArray(newNodes);
       self.setState({ treoEntry: [], nodes: newUniqueNodes, channels: newChannels });
     }
+
+    function drawResizeCanvasIcon(x, y) {
+      p.push();
+      p.stroke(100);
+      for (let i = 4; i < 20; i += 4) p.line(x - 2, y - i, x - i, y - 2);
+      p.pop();
+    }
   }
 
   changeChannel(newMode) {
@@ -116,10 +141,7 @@ class App extends React.Component {
         <h1>ReoXplore</h1>
         <section className="grid-container">
           <h3>Channels</h3>
-          <ChannelButtons
-            changeChannel={this.changeChannel}
-            channelMode={this.state.channel}
-          />
+          <ChannelButtons changeChannel={this.changeChannel} channelMode={this.state.channel} />
           <div className="p5container">
             <P5Wrapper sketch={this.sketch.bind(this)} />
           </div>
