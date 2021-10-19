@@ -31,12 +31,18 @@ class App extends React.Component {
     let count = 1;
     let previous_node;
     let first_node = true;
+    let designMode = false;
     const self = this; //to access this.state.channel on function main
 
     p.setup = () => {
       const canvas = p.createCanvas(this.state.canvasX, this.state.canvasY);
       canvas.mouseClicked(main);
       p.textSize(12);
+    };
+
+    p.keyTyped = () => {
+      if (p.key === "d") designMode = true;
+      else designMode = false;
     };
 
     p.mouseDragged = () => {
@@ -46,11 +52,14 @@ class App extends React.Component {
         p.resizeCanvas(p.mouseX, p.mouseY);
         this.setState({ canvasX: p.mouseX, canvasY: p.mouseY });
       }
+
+      if (designMode) moveNode();
     };
 
     p.draw = () => {
       p.background(220);
       drawResizeCanvasIcon(self.state.canvasX, self.state.canvasY);
+      if (designMode) drawDesignModeText();
 
       if (self.state.treoEntry.length > 0) {
         // add channels and nodes coming from treo
@@ -67,6 +76,7 @@ class App extends React.Component {
     };
 
     function main() {
+      if (designMode) return;
       let node;
       let node_clicked = false;
       let new_node_created = false;
@@ -115,10 +125,35 @@ class App extends React.Component {
       self.setState({ treoEntry: [], nodes: newUniqueNodes, channels: newChannels });
     }
 
+    function moveNode() {
+      for (let node of self.state.nodes) {
+        if (node.clicked(p.mouseX, p.mouseY)) {
+          let nodesCollapsed = false;
+          for (let otherNode of self.state.nodes) {
+            if (node.label === otherNode.label) continue;
+            if (otherNode.clicked(p.mouseX, p.mouseY)) nodesCollapsed = true;
+          }
+          if (!nodesCollapsed) {
+            node.x = p.mouseX;
+            node.y = p.mouseY;
+            self.setState({ nodes: self.state.nodes });
+          }
+        }
+      }
+    }
+
     function drawResizeCanvasIcon(x, y) {
       p.push();
       p.stroke(100);
       for (let i = 4; i < 20; i += 4) p.line(x - 2, y - i, x - i, y - 2);
+      p.pop();
+    }
+
+    function drawDesignModeText() {
+      p.push();
+      p.textSize(12);
+      p.textFont("monospace");
+      p.text("design mode", 10, 20);
       p.pop();
     }
   }
