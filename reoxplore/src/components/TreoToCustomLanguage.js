@@ -51,12 +51,12 @@ class TreoToCustomLanguage extends React.Component {
           {this.renderButton(
             "Generate nuXmv compact code",
             "/nuXmv/compact",
-            "NuXmv Compact"
+            "nuXmv compact"
           )}
           {this.renderButton(
             "Generate nuXmv components code",
             "/nuXmv/components",
-            "NuXmv Components"
+            "nuXmv components"
           )}
         </div>
         {this.state.resultError ? (
