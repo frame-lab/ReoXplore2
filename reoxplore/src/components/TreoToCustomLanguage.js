@@ -58,6 +58,11 @@ class TreoToCustomLanguage extends React.Component {
             "/nuXmv/components",
             "nuXmv components"
           )}
+          {this.renderButton(
+            "Generate Coq model",
+            "/coq/model",
+            "Coq model"
+          )}
         </div>
         {this.state.resultError ? (
           <p className="error-msg">{this.state.resultError}</p>
