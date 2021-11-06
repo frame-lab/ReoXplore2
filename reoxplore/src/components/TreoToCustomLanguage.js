@@ -1,5 +1,6 @@
 import React from "react";
 import makeRequest from "../utils/makeRequest";
+import parseTreoToHaskellInput from "../utils/parseTreoToHaskellInput"
 
 class TreoToCustomLanguage extends React.Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class TreoToCustomLanguage extends React.Component {
   }
 
   async handleClick(treo, path, title) {
-    treo = "sync(a1,a2)" // TODO: apenas para teste do request do haskell
     if (!treo) {
       this.setState({ resultError: "Error. Treo is empty." });
       return;
@@ -34,10 +34,14 @@ class TreoToCustomLanguage extends React.Component {
   }
 
   renderButton = (text, path, title) => {
+    const treo =
+      path === "/haskell/model"
+        ? parseTreoToHaskellInput(this.props.treo)
+        : this.props.treo;
     return (
       <button
         onClick={(e) => {
-          this.handleClick(this.props.treo, path, title, e);
+          this.handleClick(treo, path, title, e);
         }}
       >
         {text}
