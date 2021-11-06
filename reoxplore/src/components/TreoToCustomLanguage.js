@@ -9,6 +9,7 @@ class TreoToCustomLanguage extends React.Component {
   }
 
   async handleClick(treo, path, title) {
+    treo = "sync(a1,a2)" // TODO: apenas para teste do request do haskell
     if (!treo) {
       this.setState({ resultError: "Error. Treo is empty." });
       return;
@@ -62,6 +63,11 @@ class TreoToCustomLanguage extends React.Component {
             "Generate Coq model",
             "/coq/model",
             "Coq model"
+          )}
+          {this.renderButton(
+            "Generate Haskell code",
+            "/haskell/model",
+            "Haskell code"
           )}
         </div>
         {this.state.resultError ? (
