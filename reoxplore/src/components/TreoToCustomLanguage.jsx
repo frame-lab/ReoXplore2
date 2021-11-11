@@ -2,6 +2,7 @@ import React from "react";
 import encodeTextForRequest from "../utils/encodeTextForRequest";
 import makeRequest from "../utils/makeRequest";
 import parseTreoToHaskellInput from "../utils/parseTreoToHaskellInput";
+import DownloadButton from "./DownloadButton";
 
 class TreoToCustomLanguage extends React.Component {
   constructor(props) {
@@ -53,16 +54,6 @@ class TreoToCustomLanguage extends React.Component {
     );
   };
 
-  handleDownload = (fileData, fileName) => (e) => {
-    e.preventDefault();
-    const link = document.createElement("a");
-    link.download = fileName;
-    const blob = new Blob([fileData], { type: "text/plain" });
-    link.href = URL.createObjectURL(blob);
-    link.click();
-    URL.revokeObjectURL(link.href);
-  };
-
   render() {
     return (
       <section className="options-container">
@@ -100,15 +91,10 @@ class TreoToCustomLanguage extends React.Component {
               <div>
                 <div className="result-header">
                   <h4>{this.state.resultTitle}</h4>
-                  <button
-                    type="button"
-                    onClick={this.handleDownload(
-                      this.state.resultCode,
-                      this.state.resultFileName
-                    )}
-                  >
-                    download
-                  </button>
+                  <DownloadButton
+                    fileData={this.state.resultCode}
+                    fileName={this.state.resultFileName}
+                  />
                 </div>
                 <textarea
                   readOnly
