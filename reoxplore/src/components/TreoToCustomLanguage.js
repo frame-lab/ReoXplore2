@@ -1,4 +1,5 @@
 import React from "react";
+import encodeTextForRequest from "../utils/encodeTextForRequest";
 import makeRequest from "../utils/makeRequest";
 import parseTreoToHaskellInput from "../utils/parseTreoToHaskellInput";
 
@@ -19,11 +20,7 @@ class TreoToCustomLanguage extends React.Component {
       this.setState({ resultError: "Error. Treo is empty." });
       return;
     }
-    const treoData = new TextEncoder().encode(
-      JSON.stringify({
-        content: treo,
-      })
-    );
+    const treoData = encodeTextForRequest(treo);
     const response = await makeRequest(treoData, path);
     if (response.status === 200)
       this.setState({
