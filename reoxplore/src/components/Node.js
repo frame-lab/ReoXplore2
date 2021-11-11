@@ -1,4 +1,10 @@
 class Node {
+  /**
+   * @param p p5.js instance to create the drawing
+   * @param {number} x node's x position
+   * @param {number} y node's y position
+   * @param {string} label node's label for identification
+   */
   constructor(p, x, y, label) {
     this.p = p;
     this.x = x;

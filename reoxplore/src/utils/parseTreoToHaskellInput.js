@@ -1,6 +1,6 @@
 /** Replace all numbers of treo with a{number} to prepare for haskell compiler input.
  * @param {string} treo
- * @returns the treo with its labels modified
+ * @returns {string} the treo with its labels modified
  * i.e. sync(1,2) becomes sync(a1,a2)
  */
 export default function parseTreoToHaskellInput(treo) {
