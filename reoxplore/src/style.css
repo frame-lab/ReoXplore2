@@ -22,14 +22,9 @@ canvas {
   margin: 0 auto;
 }
 
-.ChannelButtons {
-  margin: 10px 0;
-}
-
 button {
   font-weight: bold;
   cursor: pointer;
-  margin: 0 5px;
   border: none;
   padding: 10px;
   transition: 0.3s;
@@ -50,10 +45,19 @@ button:hover {
   color: var(--dark);
 }
 
+.ChannelButtons {
+  margin: 10px 0;
+}
+
+.ChannelButtons button {
+  margin: 0 5px;
+}
+
 textarea {
   font-family: "Ubuntu Mono", monospace;
   background-color: var(--lighter);
   color: var(--dark);
+  box-sizing: border-box;
   border-width: 0 0 2px 2px;
   border-color: var(--light);
   border-style: solid;
@@ -104,12 +108,20 @@ textarea:focus {
   margin: 0 auto;
 }
 
-.options .result-container h4 {
-  margin-top: 0;
+.options .result-container .result-header {
+  display: grid;
+}
+
+.options .result-container .result-header h4 {
+  margin: 0;
   text-align: center;
 }
 
-.options textarea {
+.options .result-container .result-header button {
+  justify-self: end;
+}
+
+.options .result-container textarea {
   margin: 0;
   width: 100%;
 }
