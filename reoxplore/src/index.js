@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import P5Wrapper from "react-p5-wrapper";
+import { ReactP5Wrapper } from "react-p5-wrapper";
 import "./style.css";
 import Node from "./components/Node";
 import Channel from "./components/Channel";
@@ -178,7 +178,7 @@ class App extends React.Component {
           <h3>Channels</h3>
           <ChannelButtons changeChannel={this.changeChannel} channelMode={this.state.channel} />
           <div className="p5container">
-            <P5Wrapper sketch={this.sketch.bind(this)} />
+            <ReactP5Wrapper sketch={this.sketch} />
           </div>
           <h3 className="treo-title">Treo</h3>
           <Treo
