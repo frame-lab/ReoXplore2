@@ -53,6 +53,12 @@ button:hover {
   margin: 0 5px;
 }
 
+.p5container {
+  max-width: 850px;
+  width: 100%;
+  overflow: auto;
+}
+
 textarea {
   font-family: "Ubuntu Mono", monospace;
   background-color: var(--lighter);
@@ -127,10 +133,10 @@ textarea:focus {
 }
 /* end options section */
 
-@media (min-width: 1080px) {
+@media (min-width: 1200px) {
   .grid-container {
     display: grid;
-    grid-template-columns: 800px auto;
+    grid-template-columns: auto auto;
     grid-template-rows: 50px 60px auto;
   }
 

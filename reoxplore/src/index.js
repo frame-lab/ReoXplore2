@@ -5,9 +5,11 @@ import "./style.css";
 import Node from "./components/Node";
 import Channel from "./components/Channel";
 import getUniqueNodesFromArray from "./utils/getUniqueNodesFromArray";
+import validateCanvasSize from "./utils/validateCanvasSize";
 import { ChannelButtons } from "./components/ChannelButtons";
 import { Treo } from "./components/Treo";
 import TreoToCustomLanguage from "./components/TreoToCustomLanguage";
+
 class App extends React.Component {
   constructor() {
     super();
@@ -47,8 +49,8 @@ class App extends React.Component {
 
     p.mouseDragged = () => {
       const mouseInResizeArea = p.mouseX > this.state.canvasX - 25 && p.mouseY > this.state.canvasY - 25;
-      const canvasMaxWidth = p.mouseX >= 860;
-      if (mouseInResizeArea && !canvasMaxWidth) {
+      const isCanvasSizeValid = validateCanvasSize(p.mouseX, p.mouseY, this.state.nodes);
+      if (mouseInResizeArea && isCanvasSizeValid) {
         p.resizeCanvas(p.mouseX, p.mouseY);
         this.setState({ canvasX: p.mouseX, canvasY: p.mouseY });
       }
