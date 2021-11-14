@@ -48,7 +48,11 @@ class App extends React.Component {
     };
 
     p.mouseDragged = () => {
-      const mouseInResizeArea = p.mouseX > this.state.canvasX - 25 && p.mouseY > this.state.canvasY - 25;
+      const mouseInResizeArea =
+        p.mouseX > this.state.canvasX - 25 &&
+        p.mouseY > this.state.canvasY - 25 &&
+        p.mouseX < this.state.canvasX + 25 &&
+        p.mouseY < this.state.canvasY + 25;
       const isCanvasSizeValid = validateCanvasSize(p.mouseX, p.mouseY, this.state.nodes);
       if (mouseInResizeArea && isCanvasSizeValid) {
         p.resizeCanvas(p.mouseX, p.mouseY);
