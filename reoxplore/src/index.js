@@ -186,7 +186,6 @@ class App extends React.Component {
           <div className="p5container">
             <ReactP5Wrapper sketch={this.sketch} />
           </div>
-          <h3 className="treo-title">Treo</h3>
           <Treo
             nodes={this.state.nodes}
             channels={this.state.channels}

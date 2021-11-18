@@ -80,6 +80,41 @@ textarea:focus {
   border-color: var(--red);
 }
 
+.Treo header {
+  margin: 0 auto;
+  display: grid;
+}
+
+.Treo header,
+.Treo textarea {
+  width: 40%;
+}
+
+/* download button */
+
+#download-button {
+  justify-self: end;
+  margin-bottom: 10px;
+  background-color: transparent;
+  color: var(--dark);
+}
+#download-button:hover {
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+#download-button span {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#download-button img { /* download icon */
+  height: 12px;
+  display: inline-block;
+}
+
+/* end download button */
+
 /* options section */
 .options {
   width: 90%;
@@ -133,6 +168,8 @@ textarea:focus {
 }
 /* end options section */
 
+/* desktop media query */
+
 @media (min-width: 1200px) {
   .grid-container {
     display: grid;
@@ -150,13 +187,14 @@ textarea:focus {
     grid-row: 3;
   }
 
-  .treo-title {
+  .Treo {
     grid-column: 2;
     grid-row: 2;
   }
 
-  .Treo {
-    grid-column: 2;
-    grid-row: 3;
+  .Treo header,
+  .Treo textarea {
+    width: 90%;
   }
+
 }

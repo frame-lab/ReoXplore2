@@ -1,4 +1,5 @@
 import React from "react";
+import downloadIcon from "../assets/arrow.svg"
 
 export default class DownloadButton extends React.Component {
   handleDownload = (fileData, fileName) => (e) => {
@@ -15,9 +16,11 @@ export default class DownloadButton extends React.Component {
     return (
       <button
         type="button"
+        id="download-button"
         onClick={this.handleDownload(this.props.fileData, this.props.fileName)}
       >
-        download
+        <span>Download</span>
+        <img src={downloadIcon} alt="download icon" />
       </button>
     );
   }

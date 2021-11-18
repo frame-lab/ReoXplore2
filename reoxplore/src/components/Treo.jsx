@@ -1,5 +1,6 @@
 import React from "react";
 import equal from "fast-deep-equal";
+import DownloadButton from "./DownloadButton";
 import * as channelsDisplay from "../pub";
 
 function getChannelNames() {
@@ -41,7 +42,7 @@ export class Treo extends React.Component {
           const nodeLabel = line.match(/#\d+/)[0].replace("#", "");
           const nodeX = line.match(/\(\d+/)[0].replace("(", "");
           const nodeY = line.match(/,\d+/)[0].replace(",", "");
-          nodes[nodeLabel] = {x: Number(nodeX), y: Number(nodeY)};
+          nodes[nodeLabel] = { x: Number(nodeX), y: Number(nodeY) };
           continue;
         } else {
           console.log(`fix ${line}`);
@@ -49,7 +50,7 @@ export class Treo extends React.Component {
           break;
         }
       }
-      
+
       const regex = /[a-z]+\(\d+,\d+\)/; // channelMode(startLabel,endLabel)
       if (!line.match(regex)) {
         console.log(`fix ${line}`);
@@ -66,7 +67,7 @@ export class Treo extends React.Component {
       const matchedNumbers = line.match(/\d+/g);
       const startNodeLabel = Number(matchedNumbers[0]);
       const endNodeLabel = Number(matchedNumbers[1]);
-      if (!(startNodeLabel in nodes) || !(endNodeLabel in nodes) ) {
+      if (!(startNodeLabel in nodes) || !(endNodeLabel in nodes)) {
         console.log(`fix nodes positions`);
         readyToDraw = false;
         break;
@@ -85,11 +86,11 @@ export class Treo extends React.Component {
         channelMode: channelMode,
       });
     }
-    return {readyToDraw, channels};
+    return { readyToDraw, channels };
   }
 
   buildChannelsFromTreo(newTreo) {
-    let {readyToDraw, channels} = this.parseTreo(newTreo);
+    let { readyToDraw, channels } = this.parseTreo(newTreo);
 
     if (readyToDraw) {
       this.setState({ isCorrect: true });
@@ -101,7 +102,7 @@ export class Treo extends React.Component {
   }
 
   getTreoFromDrawing(startNode, endNode, channelMode) {
-     /**
+    /**
      * Get Treo of a drawing's channel to update textarea value
      * @param startNode the first Node object of the channel
      * @param endNode the second Node object of the channel
@@ -123,7 +124,7 @@ export class Treo extends React.Component {
     for (let n of nodes) {
       const x = Math.trunc(n.x);
       const y = Math.trunc(n.y);
-      nodesPositions += `# ${n.label} (${x}, ${y});\n`
+      nodesPositions += `# ${n.label} (${x}, ${y});\n`;
     }
     return nodesPositions + "\n";
   }
@@ -150,6 +151,10 @@ export class Treo extends React.Component {
   render() {
     return (
       <div className="Treo">
+        <header>
+          <h3 className="treo-title">Treo</h3>
+          <DownloadButton fileData={this.state.treo} fileName="treo.txt" />
+        </header>
         <textarea
           className={this.state.isCorrect ? "right" : "wrong"}
           cols="40"
