@@ -1,3 +1,11 @@
 node_modules/
 package-lock.json
 build
+
+# files to ignore in CACoq:
+CACoq/*.o
+CACoq/input.txt
+CACoq/coqModel.v
+CACoq/coqModelHs.v
+CACoq/reo2CACoq
+CACoq/reo2CACoqHs
