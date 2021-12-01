@@ -56,7 +56,7 @@ class TreoToCustomLanguage extends React.Component {
 
   render() {
     return (
-      <section className="options-container">
+      <main className="options-container">
         <div>
           {this.renderButton(
             "Generate nuXmv compact code",
@@ -76,12 +76,12 @@ class TreoToCustomLanguage extends React.Component {
             "Coq model",
             "coqModel.v"
           )}
-          {this.renderButton(
+          {/* {this.renderButton(
             "Generate Haskell code",
             "/haskell/model",
             "Haskell code",
             "haskellModel.hs"
-          )}
+          )} */}
         </div>
         {this.state.resultError ? (
           <p className="error-msg">{this.state.resultError}</p>
@@ -106,7 +106,7 @@ class TreoToCustomLanguage extends React.Component {
             )}
           </div>
         )}
-      </section>
+      </main>
     );
   }
 }
