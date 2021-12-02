@@ -9,3 +9,9 @@ CACoq/coqModel.v
 CACoq/coqModelHs.v
 CACoq/reo2CACoq
 CACoq/reo2CACoqHs
+
+# files to ignore in Reo2nuXmv:
+Reo2nuXmv/input.txt
+Reo2nuXmv/reo2nuXmv
+Reo2nuXmv/*.o
+Reo2nuXmv/*.smv
