@@ -6,3 +6,8 @@ export * from "./channels/fifo";
 export * from "./channels/transform";
 export * from "./channels/syncdrain";
 export * from "./channels/asyncdrain";
+
+// hybrid channels
+export * from "./channels/timer";
+export * from "./channels/timeddelay";
+export * from "./channels/timedtransform";
