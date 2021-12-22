@@ -2,7 +2,7 @@ import React from "react";
 import equal from "fast-deep-equal";
 import DownloadButton from "./DownloadButton";
 import * as channelsDisplay from "../pub";
-import isHybridChannel from "../utils/isHybridChannel";
+import { isHybridChannel, getHybridDefaultParameters } from "../utils/hybridChannels";
 
 function getChannelNames() {
   let channelNames = [];
@@ -116,7 +116,10 @@ export class Treo extends React.Component {
      */
     let treo;
     const nodes = `(${startNode.label}, ${endNode.label})`;
-    if (isHybridChannel(channelMode)) treo = `${channelMode}[,]${nodes};\n`;
+    if (isHybridChannel(channelMode)) {
+      const parameters = getHybridDefaultParameters(channelMode);
+      treo = `${channelMode}${parameters}${nodes};\n`;
+    }
     else treo = `${channelMode}${nodes};\n`;
 
     return treo;
