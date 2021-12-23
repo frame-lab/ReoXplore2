@@ -30,12 +30,11 @@ export class Treo extends React.Component {
     let readyToDraw = true;
 
     const lines = treo
-      .replace(/\n/g, "") // remove breaklines
-      .replace(/\s/g, "") // remove whitespaces
-      .split(";") // split by ;
-      .slice(0, -1); // also remove the last element because it's empty
+      .split(/;\n/)
+      .slice(0, -1); // remove the last element because it's empty
 
     for (let line of lines) {
+      line = line.replace(/\s/g, "") // remove whitespaces
       const commentRegex = /#.*/;
       if (line.match(commentRegex)) {
         const nodeCommentRegex = /#\d+\(\d+,\d+\)/; // #nodeLabel(node.x,node.y)
@@ -54,16 +53,16 @@ export class Treo extends React.Component {
 
       const regex = /[a-z]+\(\d+,\d+\)/; // channelMode(startLabel,endLabel)
 
-      const hybridRegex = /[a-z]+\[(.*,.*)\]\(\d+,\d+\)/; // channelMode[*,*](startLabel,endLabel)
+      const hybridRegex = /[a-z]+\(\d+,\d+\)\[.*,.*\]/; // channelMode(startLabel,endLabel)[*,*]
 
       if (!line.match(regex) && !line.match(hybridRegex)) {
-        console.log(`fix ${line}`);
+        console.error(`fix ${line}`);
         readyToDraw = false;
         break;
       }
       const channelMode = line.match(/[a-z]+/)[0];
       if (!channelNames.includes(channelMode)) {
-        console.log(`${channelMode} is not a valid channel`);
+        console.error(`${channelMode} is not a valid channel`);
         readyToDraw = false;
         break;
       }
@@ -118,7 +117,7 @@ export class Treo extends React.Component {
     const nodes = `(${startNode.label}, ${endNode.label})`;
     if (isHybridChannel(channelMode)) {
       const parameters = getHybridDefaultParameters(channelMode);
-      treo = `${channelMode}${parameters}${nodes};\n`;
+      treo = `${channelMode}${nodes}${parameters};\n`;
     }
     else treo = `${channelMode}${nodes};\n`;
 
