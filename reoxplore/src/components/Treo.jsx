@@ -114,7 +114,7 @@ export class Treo extends React.Component {
      * @returns a string with this channel treo
      */
     let treo;
-    const nodes = `(${startNode.label}, ${endNode.label})`;
+    const nodes = `(${startNode.label},${endNode.label})`;
     if (isHybridChannel(channelMode)) {
       const parameters = getHybridDefaultParameters(channelMode);
       treo = `${channelMode}${nodes}${parameters};\n`;

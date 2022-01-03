@@ -10,4 +10,4 @@ export * from "./channels/asyncdrain";
 // hybrid channels
 export * from "./channels/timer";
 export * from "./channels/timeddelay";
-export * from "./channels/timedtransform";
+export * from "./channels/timedtransformer";
