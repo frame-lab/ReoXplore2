@@ -42,6 +42,10 @@ function drawSymbol(p5, symbol, options) {
   const size = options?.size ?? 10;
   if (symbol === "circle") {
     p5.ellipse(0, 0, size);
+  } else if (symbol === "rectangle") {
+    const rectWidth = size;
+    const rectHeight = size * 2;
+    p5.rect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight);
   } else if (symbol === "triangle") {
     if (options?.isTriangleBig) {
       //draws the arrow point as a big triangle
