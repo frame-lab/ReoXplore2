@@ -1,3 +1,4 @@
+import center from "./symbolsPosition/center";
 import line from "./shapes/line";
 import triangle from "./shapes/triangle";
 
@@ -9,12 +10,7 @@ export function asyncdrain(p5, startNode, endNode, arrowSize) {
 
   line(p5, startNode, endNode);
 
-  p5.push();
-  p5.translate(mediumX, mediumY);
-  p5.rotate(angle); //rotates the lines in the center
-  p5.line(-4, arrowSize, -4, -arrowSize);
-  p5.line(4, arrowSize, 4, -arrowSize);
-  p5.pop();
+  center(p5, startNode, endNode, ["line", "line"]);
 
   triangle(p5, startNode, endNode, arrowSize, "start");
   triangle(p5, startNode, endNode, arrowSize, "end", "normal", true);

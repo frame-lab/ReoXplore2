@@ -1,4 +1,3 @@
-
 /** draws a symbol in the middle of startNode and endNode
  * @param {string[]} symbols symbols to draw: "circle" or "rectangle"
  * @param {object} options object with drawing options
@@ -23,8 +22,8 @@ export default function center(p5, startNode, endNode, symbols, options) {
 }
 
 function centerTwoSymbols(p5, symbol1, symbol2, options) {
-  const distanceFromCenter = 8;
- 
+  const distanceFromCenter = symbol1 === "line" && symbol2 === "line" ? 4 : 8;
+
   // first symbol
   p5.push();
   p5.translate(0, distanceFromCenter);
@@ -46,6 +45,9 @@ function drawSymbol(p5, symbol, options) {
     const rectWidth = size;
     const rectHeight = size * 2;
     p5.rect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight);
+  } else if (symbol === "line") {
+    p5.rotate(p5.HALF_PI); // rotate to be perpendicular
+    p5.line(0, size, 0, -size);
   } else if (symbol === "triangle") {
     if (options?.isTriangleBig) {
       //draws the arrow point as a big triangle
