@@ -31,8 +31,8 @@ class App extends React.Component {
 
   sketch(p) {
     let count = 1;
-    let previous_node;
-    let first_node = true;
+    let previousNode;
+    let firstNode = true;
     let designMode = false;
     const self = this; //to access this.state.channel on function main
 
@@ -72,50 +72,50 @@ class App extends React.Component {
         addChannelsFromTreo(self.state.treoEntry);
       }
 
-      for (let i = 0; i < self.state.channels.length; i++) {
-        self.state.channels[i].display();
+      for (const channel of self.state.channels) {
+        channel.display();
       }
 
-      for (let i = 0; i < self.state.nodes.length; i++) {
-        self.state.nodes[i].display();
+      for (const node of self.state.nodes) {
+        node.display();
       }
     };
 
     function main() {
       if (designMode) return;
-      let node;
-      let node_clicked = false;
-      let new_node_created = false;
+      let currentNode;
+      let nodeClicked = false;
+      let newNodeCreated = false;
 
-      for (let i = 0; i < self.state.nodes.length; i++) {
+      for (const node of self.state.nodes) {
         //checks if a node was clicked
-        if (self.state.nodes[i].clicked(p.mouseX, p.mouseY)) {
-          if (first_node) {
-            previous_node = self.state.nodes[i];
+        if (node.clicked(p.mouseX, p.mouseY)) {
+          if (firstNode) {
+            previousNode = node;
           } else {
-            node = self.state.nodes[i];
+            currentNode = node;
           }
-          node_clicked = true;
+          nodeClicked = true;
         }
       }
-      if (!node_clicked) {
+      if (!nodeClicked) {
         //create new node
-        node = new Node(p, p.mouseX, p.mouseY, count);
-        self.setState({ nodes: self.state.nodes.concat(node) });
-        new_node_created = true;
-        if (!previous_node) previous_node = node;
+        currentNode = new Node(p, p.mouseX, p.mouseY, count);
+        self.setState({ nodes: self.state.nodes.concat(currentNode) });
+        newNodeCreated = true;
+        if (!previousNode) previousNode = currentNode;
       }
 
-      if (!first_node) {
-        if (previous_node !== node) {
-          const channel = new Channel(p, previous_node, node, self.state.channel);
+      if (!firstNode) {
+        if (previousNode !== currentNode) {
+          const channel = new Channel(p, previousNode, currentNode, self.state.channel);
           self.setState({ channels: self.state.channels.concat(channel) });
         }
-        previous_node = null;
+        previousNode = null;
       }
 
-      if (new_node_created) count++;
-      first_node = !first_node;
+      if (newNodeCreated) count++;
+      firstNode = !firstNode;
     }
 
     function addChannelsFromTreo(treoEntry) {
@@ -132,10 +132,10 @@ class App extends React.Component {
     }
 
     function moveNode() {
-      for (let node of self.state.nodes) {
+      for (const node of self.state.nodes) {
         if (node.clicked(p.mouseX, p.mouseY)) {
           let nodesCollapsed = false;
-          for (let otherNode of self.state.nodes) {
+          for (const otherNode of self.state.nodes) {
             if (node.label === otherNode.label) continue;
             if (otherNode.clicked(p.mouseX, p.mouseY)) nodesCollapsed = true;
           }
