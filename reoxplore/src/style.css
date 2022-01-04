@@ -55,6 +55,7 @@ button:hover {
 
 .p5container {
   max-width: 850px;
+  max-height: 90vh;
   width: 100%;
   overflow: auto;
 }
