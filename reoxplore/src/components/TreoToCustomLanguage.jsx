@@ -76,12 +76,12 @@ class TreoToCustomLanguage extends React.Component {
             "Coq model",
             "coqModel.v"
           )}
-          {/* {this.renderButton(
+          {this.renderButton(
             "Generate Haskell code",
             "/haskell/model",
             "Haskell code",
             "haskellModel.hs"
-          )} */}
+          )}
         </div>
         {this.state.resultError ? (
           <p className="error-msg">{this.state.resultError}</p>
