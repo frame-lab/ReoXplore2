@@ -3,6 +3,7 @@
 export * from "./channels/sync";
 export * from "./channels/lossysync";
 export * from "./channels/fifo";
+export * from "./channels/filter";
 export * from "./channels/transform";
 export * from "./channels/syncdrain";
 export * from "./channels/asyncdrain";

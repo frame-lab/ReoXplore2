@@ -56,5 +56,19 @@ function drawSymbol(p5, symbol, options) {
       //draws the arrow point as a normal triangle
       p5.triangle(-size / 2, size * 2, size / 2, size * 2, 0, size);
     }
+  } else if (symbol === "zigzag") {
+    const vertexSize = 6;
+    p5.push();
+    p5.translate(0, -vertexSize * 2.5); // translate so that the middle of zigzag is in the middle of the line
+    p5.noFill();
+    p5.beginShape();
+    let x = -vertexSize;
+    for (let i = 0; i < vertexSize; i++) {
+      p5.vertex(x, i * vertexSize); // draw the lines
+      if (x == -vertexSize) x = vertexSize; // make the lines zigzag
+      else x = -vertexSize;
+    }
+    p5.endShape();
+    p5.pop();
   }
 }
