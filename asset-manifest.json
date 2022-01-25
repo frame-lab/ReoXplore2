@@ -1,6 +1,21 @@
 {
-  "main.css": "static/css/main.4473e297.css",
-  "main.css.map": "static/css/main.4473e297.css.map",
-  "main.js": "static/js/main.18bef036.js",
-  "main.js.map": "static/js/main.18bef036.js.map"
+  "files": {
+    "main.css": "/ReoXplore2/static/css/main.4150b24a.chunk.css",
+    "main.js": "/ReoXplore2/static/js/main.40daf81b.chunk.js",
+    "main.js.map": "/ReoXplore2/static/js/main.40daf81b.chunk.js.map",
+    "runtime-main.js": "/ReoXplore2/static/js/runtime-main.324d7230.js",
+    "runtime-main.js.map": "/ReoXplore2/static/js/runtime-main.324d7230.js.map",
+    "static/js/2.00435f6c.chunk.js": "/ReoXplore2/static/js/2.00435f6c.chunk.js",
+    "static/js/2.00435f6c.chunk.js.map": "/ReoXplore2/static/js/2.00435f6c.chunk.js.map",
+    "index.html": "/ReoXplore2/index.html",
+    "static/css/main.4150b24a.chunk.css.map": "/ReoXplore2/static/css/main.4150b24a.chunk.css.map",
+    "static/js/2.00435f6c.chunk.js.LICENSE.txt": "/ReoXplore2/static/js/2.00435f6c.chunk.js.LICENSE.txt",
+    "static/media/arrow.190cd4af.svg": "/ReoXplore2/static/media/arrow.190cd4af.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.324d7230.js",
+    "static/js/2.00435f6c.chunk.js",
+    "static/css/main.4150b24a.chunk.css",
+    "static/js/main.40daf81b.chunk.js"
+  ]
 }
