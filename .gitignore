@@ -1,24 +1,3 @@
 node_modules/
 package-lock.json
 build
-
-# files to ignore in CACoq:
-CACoq/*.o
-CACoq/input.txt
-CACoq/coqModel.v
-CACoq/coqModelHs.v
-CACoq/coqModelHs.glob
-CACoq/.coqModelHs.aux
-CACoq/reo2CACoq
-CACoq/reo2CACoqHs
-CACoq/.CaMain.aux
-CACoq/CaMain.vo
-CACoq/CaMain.vok
-CACoq/CaMain.vos
-CACoq/CaMain.glob
-
-# files to ignore in Reo2nuXmv:
-Reo2nuXmv/input.txt
-Reo2nuXmv/reo2nuXmv
-Reo2nuXmv/*/*.o
-Reo2nuXmv/*.smv
