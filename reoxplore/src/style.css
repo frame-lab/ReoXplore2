@@ -50,12 +50,13 @@ button:hover {
 }
 
 .ChannelButtons button {
-  margin: 0 5px;
+  margin: 5px;
 }
 
 .p5container {
   max-width: 850px;
   max-height: 90vh;
+  margin: 0 auto;
   width: 100%;
   overflow: auto;
 }
@@ -88,7 +89,7 @@ textarea:focus {
 
 .Treo header,
 .Treo textarea {
-  width: 40%;
+  width: 100%;
 }
 
 /* download button */
@@ -169,9 +170,16 @@ textarea:focus {
 }
 /* end options section */
 
-/* desktop media query */
+/* tablet media query */
+@media (min-width: 650px) {
+  .Treo header,
+  .Treo textarea {
+    width: 40%;
+  }
+}
 
-@media (min-width: 1200px) {
+/* desktop media query */
+@media (min-width: 1262px) {
   .grid-container {
     display: grid;
     grid-template-columns: auto auto;
