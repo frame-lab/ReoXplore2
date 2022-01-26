@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ReoXplore2/static/css/main.4150b24a.chunk.css",
-    "main.js": "/ReoXplore2/static/js/main.40daf81b.chunk.js",
-    "main.js.map": "/ReoXplore2/static/js/main.40daf81b.chunk.js.map",
+    "main.js": "/ReoXplore2/static/js/main.9d070cb2.chunk.js",
+    "main.js.map": "/ReoXplore2/static/js/main.9d070cb2.chunk.js.map",
     "runtime-main.js": "/ReoXplore2/static/js/runtime-main.324d7230.js",
     "runtime-main.js.map": "/ReoXplore2/static/js/runtime-main.324d7230.js.map",
     "static/js/2.00435f6c.chunk.js": "/ReoXplore2/static/js/2.00435f6c.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.324d7230.js",
     "static/js/2.00435f6c.chunk.js",
     "static/css/main.4150b24a.chunk.css",
-    "static/js/main.40daf81b.chunk.js"
+    "static/js/main.9d070cb2.chunk.js"
   ]
 }
