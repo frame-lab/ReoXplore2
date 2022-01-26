@@ -2,7 +2,7 @@ import React from "react";
 import equal from "fast-deep-equal";
 import DownloadButton from "./DownloadButton";
 import * as channelsDisplay from "../pub";
-import { isHybridChannel, getHybridDefaultParameters } from "../utils/hybridChannels";
+import { channelHasParameter, getChannelDefaultParameter } from "../utils/channelsParameters";
 
 function getChannelNames() {
   let channelNames = [];
@@ -45,17 +45,17 @@ export class Treo extends React.Component {
           nodes[nodeLabel] = { x: Number(nodeX), y: Number(nodeY) };
           continue;
         } else {
-          console.log(`fix ${line}`);
+          console.error(`fix ${line}`);
           readyToDraw = false;
           break;
         }
       }
 
-      const regex = /[a-z]+\(\d+,\d+\)/; // channelMode(startLabel,endLabel)
+      const channelRegex = /[a-z]+\(\d+,\d+\)/; // channelMode(startLabel,endLabel)
 
-      const hybridRegex = /[a-z]+\(\d+,\d+\)\[.*,.*\]/; // channelMode(startLabel,endLabel)[*,*]
+      const channelWithParameterRegex = /[a-z]+\(\d+,\d+\)\[.*,.*\]/; // channelMode(startLabel,endLabel)[*,*]
 
-      if (!line.match(regex) && !line.match(hybridRegex)) {
+      if (!line.match(channelRegex) && !line.match(channelWithParameterRegex)) {
         console.error(`fix ${line}`);
         readyToDraw = false;
         break;
@@ -115,8 +115,8 @@ export class Treo extends React.Component {
      */
     let treo;
     const nodes = `(${startNode.label},${endNode.label})`;
-    if (isHybridChannel(channelMode)) {
-      const parameters = getHybridDefaultParameters(channelMode);
+    if (channelHasParameter(channelMode)) {
+      const parameters = getChannelDefaultParameter(channelMode);
       treo = `${channelMode}${nodes}${parameters};\n`;
     }
     else treo = `${channelMode}${nodes};\n`;
