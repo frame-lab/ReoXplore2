@@ -4,18 +4,17 @@ build
 
 # files to ignore in CACoq:
 CACoq/*.o
-CACoq/input.txt
+CACoq/*.glob
+CACoq/*.vo
+CACoq/*.vok
+CACoq/*.vos
+CACoq/*.aux
+CACoq/*.hs
 CACoq/coqModel.v
 CACoq/coqModelHs.v
-CACoq/coqModelHs.glob
-CACoq/.coqModelHs.aux
+CACoq/input.txt
 CACoq/reo2CACoq
 CACoq/reo2CACoqHs
-CACoq/.CaMain.aux
-CACoq/CaMain.vo
-CACoq/CaMain.vok
-CACoq/CaMain.vos
-CACoq/CaMain.glob
 
 # files to ignore in Reo2nuXmv:
 Reo2nuXmv/input.txt
