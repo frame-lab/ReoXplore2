@@ -168,6 +168,27 @@ textarea:focus {
   margin: 0;
   width: 100%;
 }
+
+.loading {
+  border: 10px solid transparent;
+  border-radius: 50%;
+  border-top: 10px solid var(--red);
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1.5s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 /* end options section */
 
 /* tablet media query */

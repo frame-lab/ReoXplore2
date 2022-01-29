@@ -8,6 +8,7 @@ class TreoToCustomLanguage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       resultTitle: "",
       resultCode: "",
       resultError: "",
@@ -17,6 +18,7 @@ class TreoToCustomLanguage extends React.Component {
   }
 
   async handleClick(treo, path, title, filename) {
+    this.setState({ loading: true });
     if (!treo) {
       this.setState({ resultError: "Error. Treo is empty." });
       return;
@@ -34,6 +36,7 @@ class TreoToCustomLanguage extends React.Component {
       this.setState({
         resultError: "Error. Please verify if treo is correct.",
       });
+    this.setState({ loading: false });
   }
 
   renderButton = (text, path, title, filename) => {
@@ -87,22 +90,26 @@ class TreoToCustomLanguage extends React.Component {
           <p className="error-msg">{this.state.resultError}</p>
         ) : (
           <div className="result-container">
-            {this.state.resultCode && (
-              <div>
-                <div className="result-header">
-                  <h4>{this.state.resultTitle}</h4>
-                  <DownloadButton
-                    fileData={this.state.resultCode}
-                    fileName={this.state.resultFileName}
-                  />
+            {this.state.loading ? (
+              <div className="loading"></div>
+            ) : (
+              this.state.resultCode && (
+                <div>
+                  <div className="result-header">
+                    <h4>{this.state.resultTitle}</h4>
+                    <DownloadButton
+                      fileData={this.state.resultCode}
+                      fileName={this.state.resultFileName}
+                    />
+                  </div>
+                  <textarea
+                    readOnly
+                    cols="80"
+                    rows="20"
+                    value={this.state.resultCode}
+                  ></textarea>
                 </div>
-                <textarea
-                  readOnly
-                  cols="80"
-                  rows="20"
-                  value={this.state.resultCode}
-                ></textarea>
-              </div>
+              )
             )}
           </div>
         )}
