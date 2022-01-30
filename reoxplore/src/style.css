@@ -119,13 +119,13 @@ textarea:focus {
 
 /* options section */
 .options {
-  width: 90%;
+  width: 100%;
   margin: 50px auto;
   text-align: left;
 }
 
 .options-container {
-  display: flex;
+  display: block;
 }
 
 .options button {
@@ -170,6 +170,7 @@ textarea:focus {
 }
 
 .loading {
+  margin: 0 auto;
   border: 10px solid transparent;
   border-radius: 50%;
   border-top: 10px solid var(--red);
@@ -196,6 +197,16 @@ textarea:focus {
   .Treo header,
   .Treo textarea {
     width: 40%;
+  }
+}
+
+/* small desktop media query */
+@media (min-width: 1100px) {
+  .options {
+    width: 90%;
+  }
+  .options-container {
+    display: flex;
   }
 }
 
