@@ -25,8 +25,11 @@ What you need to do:
 
       export function yourchannelname(p5, startNode, endNode, arrowSize) {
         triangle(p5, startNode, endNode, arrowSize); // draws a triangle in the endNode pointing to endNode
+        // or
         triangle(p5, startNode, endNode, arrowSize, "start"); // draws a triangle in the startNode  pointing to endNode
+        // or
         triangle(p5, startNode, endNode, arrowSize, "end", "normal", true); // draws a triangle in the endNode pointing to startNode
+        // or
         triangle(p5, startNode, endNode, arrowSize, "end", "big", true); // draws a big triangle in the endNode pointing to startNode
       }
       ```
@@ -36,16 +39,22 @@ What you need to do:
 
       export function yourchannelname(p5, startNode, endNode, arrowSize) {
         center(p5, startNode, endNode, ["rectangle"]); // draws a rectangle like in fifo
+        // or
         center(p5, startNode, endNode, ["triangle"], { isTriangleBig: true }); // draws a big triangle like in transform
+        // or
         center(p5, startNode, endNode, ["zigzag"]); // draws a zigzag like in filter
+        // or
         center(p5, startNode, endNode, ["circle"]); // draws a circle like in timer
+        // or
         center(p5, startNode, endNode, ["circle", "circle"]); // draws two circles like in timeddelay
+        // or
         center(p5, startNode, endNode, ["line", "line"]); // draws two perpendicular lines like in asyncdrain
+        // or
         center(p5, startNode, endNode, ["triangle", "circle"], { isTriangleBig: true }); // draws a big triangle and a circle like in timedtransformer
       }
       ```
 - export the channel function in `/src/pub/index.js` file so they can be used in the project, like this:
-  ```
+  ```js
   export * from "./channels/yourchannelname";
   ```
 - congratulations, you added a new channel!
