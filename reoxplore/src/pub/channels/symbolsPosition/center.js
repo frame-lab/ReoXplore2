@@ -1,8 +1,8 @@
 /** draws a symbol in the middle of startNode and endNode
  * @param {string[]} symbols symbols to draw: "circle" or "rectangle"
  * @param {object} options object with drawing options
- * @param {number?} options.radius size of the circle, default is 10
- * @param {boolean?} options.isDouble if true, draws two symbols, otherwise draws only one; default is false
+ * @param {number?} options.size size of the circle, default is 10
+ * @param {boolean?} options.isTriangleBig if true, draws a big triangle, otherwise draws a normal one
  */
 export default function center(p5, startNode, endNode, symbols, options) {
   const centerX = (startNode.x + endNode.x) / 2;
