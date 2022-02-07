@@ -132,6 +132,15 @@ textarea:focus {
   display: flex;
 }
 
+.options-container a {
+  color: var(--red);
+  text-decoration: none;
+}
+
+.options-container a:hover {
+  text-decoration: underline;
+}
+
 .options button {
   display: block;
   margin-bottom: 10px;
