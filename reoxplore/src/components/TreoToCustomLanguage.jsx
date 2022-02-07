@@ -34,7 +34,8 @@ class TreoToCustomLanguage extends React.Component {
       });
     else
       this.setState({
-        resultError: "Error. Please verify if treo is correct.",
+        resultError:
+          "Error. Please check if Treo is correct or if there are any errors in the compilers",
       });
     this.setState({ loading: false });
   }
