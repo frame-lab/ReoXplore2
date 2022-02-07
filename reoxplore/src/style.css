@@ -11,10 +11,14 @@
 }
 
 body {
-  margin: 10px 30px;
+  margin: 0;
   text-align: center;
   font-family: "Noto Sans", sans-serif;
   color: var(--dark);
+}
+
+main {
+  margin: 10px 30px;
 }
 
 canvas {
@@ -169,6 +173,33 @@ textarea:focus {
   width: 100%;
 }
 /* end options section */
+
+.credits {
+  background-color: var(--light);
+  margin-top: 50px;
+}
+
+.credits p {
+  color: var(--dark);
+  font-size: 0.75rem;
+  margin: 0;
+  padding: 14px;
+}
+
+.credits a {
+  color: var(--dark);
+  text-decoration: none;
+}
+.credits a:hover {
+  color: var(--red);
+  text-decoration: underline;
+}
+
+.github-icon {
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: top;
+}
 
 /* tablet media query */
 @media (min-width: 650px) {

@@ -9,6 +9,7 @@ import validateCanvasSize from "./utils/validateCanvasSize";
 import { ChannelButtons } from "./components/ChannelButtons";
 import { Treo } from "./components/Treo";
 import TreoToCustomLanguage from "./components/TreoToCustomLanguage";
+import githubIcon from "./assets/github.png"
 
 class App extends React.Component {
   constructor() {
@@ -178,6 +179,7 @@ class App extends React.Component {
 
   render() {
     return (
+      <>
       <main>
         <h1>ReoXplore</h1>
         <section className="grid-container">
@@ -198,6 +200,19 @@ class App extends React.Component {
           <TreoToCustomLanguage treo={this.state.treoCode} />
         </section>
       </main>
+      <footer className="credits">
+        <p>
+          <a href="https://github.com/frame-lab/ReoXplore2">
+          <img src={githubIcon} alt="github logo" className="github-icon"/>
+          </a>
+          Developed by{" "}
+          <a href="https://github.com/ferreira-mariana">
+            Mariana Ferreira
+          </a>
+          /<a href="http://www2.ic.uff.br/~frame/index.php">FR∀M∃ Lab</a>
+        </p>
+      </footer>
+    </>
     );
   }
 }
