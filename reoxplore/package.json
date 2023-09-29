@@ -7,8 +7,8 @@
   "main": "index.js",
   "dependencies": {
     "p5": "^1.4.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-p5-wrapper": "3.0.2"
   },
   "devDependencies": {
