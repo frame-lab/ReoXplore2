@@ -124,9 +124,9 @@ http
       }
     }
   })
-  .listen(8081, "127.0.0.1");
+  .listen(8081, "0.0.0.0");
 
-console.log("Server running at http://127.0.0.1:8081/");
+console.log("Server running at http://0.0.0.0:8081/");
 
 function processPost(request, response, callback) {
   var queryData = "";
