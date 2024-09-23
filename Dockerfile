@@ -29,7 +29,7 @@ COPY . .
 # Copy supervisord configuration file
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 8081
 
 # Run supervisord
 CMD ["node", "server.js"]
